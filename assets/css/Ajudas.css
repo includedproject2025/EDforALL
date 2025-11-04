@@ -1,0 +1,169 @@
+.conteudo-ajudas {
+    margin-left: 100px; /* Espaço para o menu lateral */
+    padding: 60px 20px;
+    transition: margin-left 0.2s ease; /* Transição suave */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding-left: 50px; /* Reduzido de 140px para 100px */
+}
+
+/* Ajusta o container quando o menu está expandido */
+.menu-lateral.expandir ~ .conteudo-ajudas {
+    padding-left: 240px; /* Reduzido de 280px para 240px */
+}
+
+.conteudo-ajudas h1 {
+    font-size: 2.3em;
+    margin-bottom: 30px;
+    color: #007bff;
+    text-align: center;
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.conteudo-ajudas p {
+    font-size: 1.15em;
+    line-height: 1.7;
+    color: #444;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.secao-ajuda {
+    background: linear-gradient(135deg, #f9f9f9 80%, #e3f0ff 100%);
+    border-radius: 16px;
+    padding: 32px 28px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    border: 1px solid #e0e7ef;
+    width: 100%;
+    margin: 0;
+}
+
+.secao-ajuda h2 {
+    font-size: 1.6em;
+    color: #0056b3;
+    margin-bottom: 18px;
+    border-bottom: 2px solid #e3e3e3;
+    padding-bottom: 8px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.secao-ajuda p {
+    font-size: 1.08em;
+    color: #333;
+    text-align: left;
+    margin-bottom: 0;
+}
+
+secao-ajuda ul {
+    margin: 0 0 0 18px;
+    padding: 0;
+    list-style: none;
+}
+
+.secao-ajuda ul li {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 14px;
+    font-size: 1.08em;
+    color: #333;
+}
+
+.secao-ajuda ul li:before {
+    content: '\2022';
+    position: absolute;
+    left: 0;
+    color: #007bff;
+    font-size: 1.5em;
+    top: 0.1em;
+}
+
+/* DARK MODE */
+body.dark-mode {
+    background-color: transparent;
+}
+
+body.dark-mode .conteudo-ajudas {
+    background: transparent;
+}
+
+body.dark-mode .conteudo-ajudas h1 {
+    color: #4dabf7;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+body.dark-mode .conteudo-ajudas p {
+    color: #e9ecef;
+}
+
+body.dark-mode .secao-ajuda {
+    background: linear-gradient(135deg, #2d3436 0%, #1a1d24 100%);
+    border: 1px solid #2d3436;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+}
+
+body.dark-mode .secao-ajuda h2 {
+    color: #4dabf7;
+    border-bottom: 2px solid #2d3436;
+}
+
+body.dark-mode .secao-ajuda p,
+body.dark-mode .secao-ajuda ul li {
+    color: #e9ecef;
+}
+
+body.dark-mode .secao-ajuda ul li:before {
+    color: #4dabf7;
+}
+
+/* Estilos responsivos */
+@media (max-width: 1200px) {
+    .conteudo-ajudas {
+        grid-template-columns: 1fr;
+        padding-left: 100px; /* Reduzido de 140px para 100px */
+    }
+
+    .menu-lateral.expandir ~ .conteudo-ajudas {
+        padding-left: 240px; /* Reduzido de 280px para 240px */
+    }
+}
+
+@media (max-width: 768px) {
+    .conteudo-ajudas {
+        margin-left: 0;
+        padding: 30px 10px;
+        grid-template-columns: 1fr;
+    }
+
+    .menu-lateral.expandir ~ .conteudo-ajudas {
+        margin-left: 0;
+        padding-left: 10px;
+    }
+
+    .secao-ajuda {
+        padding: 18px 8px;
+    }
+}
+
+@media (max-width: 576px) {
+    .conteudo-ajudas {
+        padding: 10px 2px;
+    }
+
+    .conteudo-ajudas h1 {
+        font-size: 1.3em;
+    }
+
+    .secao-ajuda h2 {
+        font-size: 1.1em;
+    }
+
+    .secao-ajuda p, .secao-ajuda ul li {
+        font-size: 0.98em;
+    }
+} 

@@ -1,0 +1,259 @@
+/* Adapte os estilos base do seu projeto */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
+    display: flex;
+}
+
+.conteudo-principal-perfil {
+    flex-grow: 1;
+    padding: 30px;
+    margin-left: 100px; /* Ajuste conforme o seu menu */
+    transition: margin-left 0.3s;
+}
+
+/* Cabeçalho do Perfil */
+.cabecalho-perfil {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    margin-bottom: 40px;
+}
+.avatar-grande-perfil {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #fff;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+.info-texto-perfil h1 {
+    margin: 0 0 10px 0;
+    font-size: 2.5rem;
+}
+.info-texto-perfil p {
+    margin: 5px 0;
+    font-size: 1.1rem;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Grelha de Materiais */
+.materiais-publicos h2 {
+    font-size: 1.8rem;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+.materiais-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+}
+.material-card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex; /* Adicionado */
+    flex-direction: column; /* Adicionado */
+    justify-content: space-between; /* Adicionado */
+    text-align: center;
+}
+.material-icon-wrapper {
+    flex-grow: 1; /* Permite que o ícone ocupe o espaço disponível */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.material-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+.pdf-icon {
+    width: 60px;
+    height: auto;
+    margin-bottom: 10px;
+}
+.material-titulo {
+    margin: 15px 0;
+    font-size: 0.9rem;
+    color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-clamp: 3;
+}
+.material-acoes {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+    margin-top: auto; /* Empurra os botões para o fundo */
+}
+
+.btn-acao {
+    border: none;
+    background-color: #f0f0f0;
+    color: #333;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-acao.btn-ver:hover {
+    background-color: #3498db; /* Azul */
+    color: white;
+}
+
+.btn-acao.btn-download:hover {
+    background-color: #2ecc71; /* Verde */
+    color: white;
+}
+
+.mensagem-vazio {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #777;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+/* Modal de PDF (reutilizado) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+}
+.modal-conteudo {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 900px;
+    height: 90%;
+    border-radius: 5px;
+    position: relative;
+}
+.fechar-modal {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.fechar-modal:hover,
+.fechar-modal:focus {
+    color: black;
+}
+
+
+/* --- DARK MODE STYLES --- */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.dark-mode .conteudo-principal-perfil {
+    color: #e0e0e0;
+}
+
+body.dark-mode .cabecalho-perfil {
+    background-color: #1e1e1e;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .avatar-grande-perfil {
+    border-color: #333;
+}
+
+body.dark-mode .info-texto-perfil h1 {
+    color: #e0e0e0;
+}
+
+body.dark-mode .info-texto-perfil p {
+    color: #c0c0c0;
+}
+
+body.dark-mode .materiais-publicos h2 {
+    color: #e0e0e0;
+    border-bottom-color: #555;
+}
+
+body.dark-mode .material-card {
+    background-color: #1e1e1e;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .material-card:hover {
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.15);
+}
+
+body.dark-mode .material-titulo {
+    color: #e0e0e0;
+}
+
+body.dark-mode .material-acoes {
+    border-top-color: #333;
+}
+
+body.dark-mode .btn-acao {
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+}
+
+body.dark-mode .btn-acao.btn-ver:hover {
+    background-color: #3a80d2; /* Um azul ajustado para dark mode */
+    color: white;
+}
+
+body.dark-mode .btn-acao.btn-download:hover {
+    background-color: #218838; /* Um verde ajustado para dark mode */
+    color: white;
+}
+
+body.dark-mode .mensagem-vazio {
+    background-color: #252525;
+    color: #aaa;
+}
+
+body.dark-mode .modal-conteudo {
+    background-color: #1e1e1e;
+    border-color: #555;
+}
+
+body.dark-mode .fechar-modal {
+    color: #aaa;
+}
+
+body.dark-mode .fechar-modal:hover,
+body.dark-mode .fechar-modal:focus {
+    color: #e0e0e0;
+}

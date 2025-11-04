@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criação de materiais SPC</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="assets/css/CreatematerialDD.css">
+    <script src="assets/js/authRedirect.js"></script>
+</head>
+<body>
+    <!-- Menu Lateral -->
+    <div id="menu-container"></div>
+    
+    <!-- Botão de Perfil -->
+    <div class="btn-perfil" id="btn-per">
+        <img id="user-avatar" src="/uploads/avatars/default_avatar.png" alt="Avatar do Utilizador" style="width: 50px; height: 50px; border-radius: 50%; cursor: pointer;" onclick="window.location.href='pageEditprofile.html'">
+    </div>
+
+    <!-- main-area-wrapper para o conteúdo principal e barra de ferramentas -->
+    <div class="main-area-wrapper">
+        <!-- Barra superior com título e ações -->
+        <div class="top-bar">
+            <div class="material-title" id="material-title">Material 1 SPC</div>
+            <div class="action-buttons">
+                <button class="action-button" title="Guardar" onclick="saveMaterial()"><i class="bi bi-floppy"></i></button>
+                <button id="delete-btn" class="action-button" title="Apagar seleção"><i class="bi bi-trash"></i></button>
+                <button id="zoom-in-btn" class="action-button" title="Aumentar"><i class="bi bi-zoom-in"></i></button>
+                <button id="zoom-out-btn" class="action-button" title="Diminuir"><i class="bi bi-zoom-out"></i></button>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <!-- Área de Trabalho -->
+            <div class="canvas-wrapper">
+                <div class="canvas" id="canvas" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            </div>
+
+            <!-- Área de Ferramentas -->
+            <div class="toolbox">
+                <div class="tabs">
+                    <button class="tab f active" onclick="toggleTab('ferramentas')">Ferramentas</button>
+                    <button class="tab s" onclick="toggleTab('simbolos')">Símbolos</button>
+                </div>
+
+                <!-- ABA DE FERRAMENTAS -->
+                <div id="ferramentas" class="tab-content active">
+                    <div class="tool-grid">
+                        <div class="tool-item">
+                            <div class="tool" draggable="true" ondragstart="drag(event)" data-type="text">
+                                <div class="tool-icon">T</div>
+                                <div class="tool-label">Texto</div>
+                            </div>
+                        </div>
+                        
+                        <div class="tool-item">
+                            <div class="tool" draggable="true" ondragstart="drag(event)" data-type="formas">
+                                <div class="tool-icon"><i class="bi bi-circle"></i></div>
+                                <div class="tool-label">Formas</div>
+                            </div>
+                        </div>
+                        
+                        <div class="tool-item">
+                            <div class="tool" draggable="true" ondragstart="drag(event)" data-type="line">
+                                <div class="tool-icon"><i class="bi bi-slash-lg"></i></div>
+                                <div class="tool-label">Linha</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Painel de formas (oculto inicialmente) -->
+                    <div id="shapes-panel" style="display: none;">
+                        <div class="symbols-grid">
+                            <div class="symbol" data-type="circle">
+                                <div style="width: 30px; height: 30px; border: 1px solid #000; border-radius: 50%;"></div>
+                            </div>
+                            <div class="symbol" data-type="rect">
+                                <div style="width: 30px; height: 30px; border: 1px solid #000;"></div>
+                            </div>
+                            <div class="symbol" data-type="triangle">
+                                <div style="width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-bottom: 30px solid #000;"></div>
+                            </div>
+                            <div class="symbol" data-type="diamond">
+                                <div style="width: 30px; height: 30px; border: 1px solid #000; transform: rotate(45deg);"></div>
+                            </div>
+                            <div class="symbol" data-type="pentagon">
+                                <div style="width: 30px; height: 30px; position: relative;">
+                                    <i class="bi bi-pentagon" style="font-size: 30px;"></i>
+                                </div>
+                            </div>
+                            <div class="symbol" data-type="hexagon">
+                                <div style="width: 30px; height: 30px; position: relative;">
+                                    <i class="bi bi-hexagon" style="font-size: 30px;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Propriedades -->
+                    <div class="properties-panel" id="text-properties">
+                        <div class="properties-title">Propriedades:</div>
+                        
+                        <!-- Propriedades de texto -->
+                        <div class="property-group">
+                            <div class="property-row">
+                                <div class="property-label">Fonte:</div>
+                                <div class="property-control">
+                                    <select id="font-size" onchange="updateTextProperties()">
+                                        <option value="11px">11</option>
+                                        <option value="14px" selected>14</option>
+                                        <option value="18px">18</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="property-row">
+                                <div class="property-label">Cor:</div>
+                                <div class="property-control">
+                                    <input type="color" id="text-color" value="#000000" class="color-input" onchange="updateTextProperties()">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="format-buttons">
+                            <button class="format-btn" onclick="formatText('bold')" title="Negrito"><b>N</b></button>
+                            <button class="format-btn" onclick="formatText('italic')" title="Itálico"><i>I</i></button>
+                            <button class="format-btn" onclick="formatText('underline')" title="Sublinhado"><u>S</u></button>
+                        </div>
+                        
+                        <div class="align-buttons">
+                            <button class="align-btn" onclick="alignText('left')" title="Alinhar à esquerda">
+                                <i class="bi bi-text-left"></i>
+                            </button>
+                            <button class="align-btn" onclick="alignText('center')" title="Centralizar">
+                                <i class="bi bi-text-center"></i>
+                            </button>
+                            <button class="align-btn" onclick="alignText('right')" title="Alinhar à direita">
+                                <i class="bi bi-text-right"></i>
+                            </button>
+                            <button class="align-btn" onclick="alignText('justify')" title="Justificar">
+                                <i class="bi bi-justify"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Propriedades de forma (inicialmente ocultas) -->
+                    <div class="properties-panel" id="shape-properties" style="display: none;">
+                        <div class="properties-title">Propriedades:</div>
+                        
+                        <div class="property-group">
+                            <div class="property-row">
+                                <div class="property-label">Cor:</div>
+                                <div class="property-control">
+                                    <input type="color" id="shape-color" value="#ffffff" class="color-input" onchange="updateShapeProperties()">
+                                </div>
+                            </div>
+                            
+                            <div class="property-row">
+                                <div class="property-label">Borda:</div>
+                                <div class="property-control">
+                                    <input type="color" id="border-color" value="#000000" class="color-input" onchange="updateShapeProperties()">
+                                </div>
+                            </div>
+                            
+                            <div class="property-row">
+                                <div class="property-label">Espessura:</div>
+                                <div class="property-control">
+                                    <select id="border-width" onchange="updateShapeProperties()">
+                                        <option value="1">1</option>
+                                        <option value="2" selected>2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                    </select>
+                                </div>
+                            </div>
+                          
+                            <div class="property-row">
+                                <div class="property-label">Orientação (°):</div>
+                                <div class="property-control">
+                                    <input type="number" id="shape-orientation" value="0" oninput="updateShapeProperties()" style="width: 60px; padding: 5px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Propriedades de linha (inicialmente ocultas) -->
+                    <div class="properties-panel" id="line-properties" style="display: none;">
+                        <div class="properties-title">Propriedades:</div>
+                        
+                        <div class="property-group">
+                            <div class="property-row">
+                                <div class="property-label">Cor:</div>
+                                <div class="property-control">
+                                    <input type="color" id="line-color" value="#000000" class="color-input" onchange="updateLineProperties()">
+                                </div>
+                            </div>
+                            
+                            <div class="property-row">
+                                <div class="property-label">Espessura:</div>
+                                <div class="property-control">
+                                    <select id="line-width" onchange="updateLineProperties()">
+                                        <option value="1px" selected>1</option>
+                                        <option value="2px">2</option>
+                                        <option value="3px">3</option>
+                                        <option value="4px">4</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="property-row">
+                                <div class="property-label">Orientação:</div>
+                                <div class="property-control">
+                                    <select id="line-orientation" onchange="updateLineProperties()">
+                                        <option value="0deg">0°</option>
+                                        <option value="45deg">45°</option>
+                                        <option value="90deg">90°</option>
+                                        <option value="135deg">135°</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ABA DE SÍMBOLOS -->
+                <div id="simbolos" class="tab-content">
+                    <input type="text" class="search-box" placeholder="Pesquisar símbolos..." id="symbol-search">
+                    
+                    <div class="symbol-categories" id="symbol-categories-container">
+                        <!-- As categorias serão carregadas aqui dinamicamente -->
+                    </div>
+                    
+                    <!-- Área dos símbolos por categoria (inicialmente oculta) -->
+                    <div id="symbol-container" class="symbols-grid" style="display: none;">
+                        <!-- Os símbolos serão carregados aqui dinamicamente -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="assets/js/menu.js"></script>
+    <script src="assets/js/globalAvatarUpdater.js"></script>
+    <script src="assets/js/CreatematerialDD.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</body>
+</html>

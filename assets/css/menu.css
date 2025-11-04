@@ -1,0 +1,280 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'arial', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background-color: white;
+}
+
+nav.menu-lateral {
+    height: 100%;
+    background-color: #7494ec; 
+    padding: 40px 0 40px 1%;
+    position: fixed; 
+    overflow-y: hidden;
+    transition: .2s;
+    border-radius: 0% 40px 40px 0%;
+    width: 80px; /* largura quando o menu está fechado (reduzido) */
+
+}
+
+/*Configuração do botao expandir*/
+.btn-expandir {
+    position: absolute;
+    top: 20px;
+    left: 100px; /*posicao do botao qd o menu esta fechado*/
+    z-index: 1000;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: left 0.2s ease;
+    font-size: 35px;
+    color: black;
+}
+
+/* posicao do botao qd o menu está expandido */
+nav.menu-lateral.expandir ~ .btn-expandir {
+    left: 240px;
+}
+
+nav.menu-lateral.expandir {
+    width: 220px; /* largura quando o menu está expandido */
+}
+
+nav.menu-lateral:not(.expandir) .txt-link {
+    display: none;
+}
+nav.menu-lateral:not(.expandir) .icon {
+    margin: 0 auto;
+}
+
+
+/*Configuração do logo*/
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-size: 20px;
+    font-weight: bolder;
+    padding-left: 15px;
+}
+
+.logo-img{
+    filter: brightness(0) invert(1);
+}
+
+.logo-text {
+    display: none;
+}
+
+.menu-lateral.expandir .logo-text {
+    display: inline;
+}
+
+ul {
+    height: 100%;
+    list-style-type: none;
+}
+
+ul li.item-menu {
+    transition: 0.5s;
+}
+
+/*Configuração da barra de seleção*/
+ul li.ativo,
+ul li.item-menu:hover {
+    background-color: white;
+    border-radius: 60px 0 0 60px;
+    font-weight: bold;
+}
+
+/*Configuração dos icons*/
+ul li.item-menu a{
+color: white;
+text-decoration: none;
+font-size: 19px;
+padding: 15px 10px;
+display: flex; 
+margin-top: 70px;
+margin-bottom: -35px;
+}
+/*espaço entre icons e texto no menu*/
+nav.menu-lateral.expandir ul li.item-menu a .txt-link{
+    margin-left: 20px;
+}
+
+ul li.item-menu:hover a,
+ul li.item-menu.ativo a {
+    color: black;
+}
+
+ul li.item-menu:hover a .icon > i,
+ul li.item-menu.ativo a .icon > i {
+    color: black;
+}
+
+ul li.item-menu a .icon > i {
+    font-size: 30px;
+    margin-left: 0; /*tamanho do menu quando está expandido*/
+    color: white;
+}
+
+ul li.item-menu a .txt-link {
+    margin-left: 10px;
+    transition: 0.5s;
+    opacity: 0;
+    margin-top:5px;
+}
+
+/*Configuração do texto do menu*/
+nav.menu-lateral.expandir .txt-link {
+    opacity: 1; /*Nao deixa desaparecer as letras quando selecionado*/
+}
+
+/*Configuração do contraste*/
+.item-cor {
+    background-color: #7494ec;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: 0.3s;
+    position: relative;
+    top: -110px; 
+    left: -26px;
+}
+
+/* Posição do botão de contraste quando o menu está fechado */
+nav.menu-lateral:not(.expandir) .item-cor {
+    left: 10px;
+}
+
+.item-cor .icon i,
+.item-cor span {
+    font-size: 25px;
+    color: white;
+}
+
+.item-cor:hover,
+.item-cor:hover .icon i,
+.item-cor:hover span {
+    background-color: #7494ec;
+    color: black;
+}
+
+.item-cor span{
+    color: white;
+    text-decoration: none;
+    font-size: 19px;
+} 
+
+/*espaço entre icons e texto no menu*/
+nav.menu-lateral.expandir .item-cor span{
+    margin-left: 20px;
+}
+
+/* ======= MODO ESCURO (dark-mode) ======= */
+body.dark-mode {
+    background-color: #121212; /* Fundo geral do body no modo escuro */
+}
+
+/*Configuração do menu*/
+body.dark-mode .menu-lateral {
+    background-color: #1e1e1e;
+}
+
+/*Configuração do botao expandir*/
+body.dark-mode .btn-expandir {
+    color: #e0e0e0;
+}
+
+/*Configuração do logo*/
+body.dark-mode .logo {
+    color: #e0e0e0;
+}
+
+/*Configuração da barra de seleção e itens do menu */
+body.dark-mode ul li.item-menu:hover,
+body.dark-mode ul li.item-menu.ativo {
+    background-color: #3a3a3a;
+}
+
+body.dark-mode ul li.item-menu a {
+    color: #e0e0e0;
+}
+
+body.dark-mode ul li.item-menu a .icon > i {
+    color: #e0e0e0;
+}
+
+body.dark-mode ul li.item-menu:hover a .icon > i,
+body.dark-mode ul li.item-menu.ativo a .icon > i {
+    color: #8bb3ff; /* Cor de destaque para ícones ativos no modo escuro */
+}
+
+body.dark-mode ul li.item-menu:hover a .txt-link,
+body.dark-mode ul li.item-menu.ativo a .txt-link {
+    color: #8bb3ff; /* Cor de destaque para texto ativo no modo escuro */
+}
+
+/*Configuração do contraste*/
+body.dark-mode .item-cor {
+    background-color: #1e1e1e;
+}
+
+body.dark-mode .item-cor .icon i,
+body.dark-mode .item-cor span {
+    color: #e0e0e0;
+}
+
+body.dark-mode .item-cor:hover,
+body.dark-mode .item-cor:hover .icon i,
+body.dark-mode .item-cor:hover span {
+    background-color: #3a3a3a;
+    color: #8bb3ff;
+}
+
+body.dark-mode .btn-perfil {
+    color: #e0e0e0;
+}
+
+body.dark-mode .btn-perfil .profile-avatar-img {
+    border-color: #3a3a3a;
+}
+
+/* Adicione ou ajuste este CSS */
+.btn-perfil .profile-avatar-img,
+#btn-perfil-container .profile-avatar-img, /* Para pageInit.html */
+#btn-perfil-utilizador .profile-avatar-img { /* Para Community.html */
+    width: 35px; /* Ajuste conforme o tamanho do seu ícone original */
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    border: 1px solid #ccc; /* Opcional: uma pequena borda */
+}
+
+/* Garanta que o ícone padrão também tenha um tamanho consistente e cor no modo escuro */
+.btn-perfil .bi-person-circle,
+#btn-perfil-container .bi-person-circle,
+#btn-perfil-utilizador .bi-person-circle {
+    font-size: 30px; /* Ajuste para corresponder ao tamanho visual do avatar */
+    cursor: pointer;
+    /* A cor já deve ser herdada ou definida pelo seu tema/dark mode */
+}
+
+body.dark-mode .btn-perfil .bi-person-circle,
+body.dark-mode #btn-perfil-container .bi-person-circle,
+body.dark-mode #btn-perfil-utilizador .bi-person-circle {
+    color: #f0f0f0; /* Cor do ícone no modo escuro */
+}
+body.dark-mode .btn-perfil .profile-avatar-img,
+body.dark-mode #btn-perfil-container .profile-avatar-img,
+body.dark-mode #btn-perfil-utilizador .profile-avatar-img {
+    border-color: #555;
+}

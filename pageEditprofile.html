@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Perfil</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="assets/css/pageEditprofile.css">
+    <script src="assets/js/authRedirect.js"></script>
+</head>
+<body>
+
+    <div class="profile-container">
+        <!-- Coluna da Esquerda -->
+        <div class="profile-left">
+            <div class="avatar-section">
+                <img id="avatarPreview" src="assets/img/avatares/default_avatar.png" alt="Avatar do Utilizador" class="avatar-img">
+                <input type="file" id="avatarFile" accept="image/*" style="display:none;">
+                <button type="button" id="changeAvatarBtn" class="change-avatar-btn">
+                    <i class="bi bi-pencil-square"></i> Alterar Avatar
+                </button>
+            </div>
+            <!-- Os botões de navegação podem ficar aqui ou ser parte do menu principal se existir um -->
+            <button class="nav-btn active-nav-btn" id="editProfileNavBtn">Editar Perfil</button>
+            <button class="nav-btn" id="changePasswordNavBtn" onclick="window.location.href='Editpass.html'">Alterar Palavra-Passe</button>
+            <button class="nav-btn" id="backToDashboardBtn" onclick="window.location.href='pageInit.html'">
+                <i class="bi bi-arrow-left-circle"></i> Voltar ao Painel
+            </button>
+        </div>
+
+        <!-- Coluna da Direita -->
+        <div class="profile-right">
+            <h2>Editar Perfil</h2>
+            <form id="editProfileForm">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" placeholder="Username" required readonly>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <label for="instituicao">Instituição:</label>
+                    <input type="text" id="instituicao" name="instituicao" placeholder="Instituição">
+                </div>
+                <!-- Adicione esta div para exibir mensagens -->
+                <div id="profileMessageContainer" class="message-container"></div>
+                <button type="submit" class="save-btn">
+                    <i class="bi bi-check-circle"></i> Guardar Alterações
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="assets/js/pageEditprofile.js"></script>
+</body>
+</html>

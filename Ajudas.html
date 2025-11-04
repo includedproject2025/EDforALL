@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajudas</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="assets/css/Dashboard.css"> <!-- Reutiliza o CSS do Dashboard para o menu e perfil -->
+    <link rel="stylesheet" href="assets/css/Ajudas.css"> <!-- CSS específico para a página de Ajudas -->
+    <script src="assets/js/authRedirect.js"></script>
+</head>
+<body>
+    <!--Menu Lateral -->
+    <div id="menu-container"></div>
+
+    <!-- Botão de Perfil -->
+    <div class="btn-perfil" id="btn-per">
+        <img id="user-avatar" src="/uploads/avatars/default_avatar.png" alt="Avatar do Utilizador" style="width: 50px; height: 50px; border-radius: 50%; cursor: pointer;" onclick="window.location.href='pageEditprofile.html'">
+    </div>
+
+    <!-- Conteúdo principal da página de Ajudas -->
+    <main class="conteudo-ajudas">
+        <h2 class="titulo" style="text-decoration: underline; margin-top: 50px;">Ajudas</h2>
+        <p  class="conteudo" style=" margin-left: -1370px; margin-top: 100px;">Aqui encontrará informações e recursos úteis para o ajudar a utilizar a aplicação.</p>
+        
+        <section class="secao-ajuda">
+            <h2>O que é o EdEquity?</h2>
+            <p>O EdEquity é uma plataforma desenhada para capacitar docentes de Educação Especial, facilitando a adaptação e partilha de conteúdos educativos.<br>
+            Quer esteja a trabalhar com alunos que necessitam de ferramentas de aprendizagem personalizadas ou à procura de materiais de ensino inclusivo, a nossa plataforma oferece a flexibilidade e o apoio necessários para responder a todas as suas necessidades.</p>
+        </section>
+
+        <section class="secao-ajuda">
+            <h2>O que pode fazer?</h2>
+            <ul>
+                <li><b>Adaptação de Recursos:</b> Converta os seus materiais para se adequarem a diferentes necessidades educativas especiais.</li>
+                <li><b>Partilha de Conteúdos:</b> Explore uma biblioteca de conteúdos projetada para educação inclusiva.</li>
+                <li><b>Colaboração:</b> Conecte-se a outros educadores, partilhe recursos e crie um ambiente de aprendizagem mais inclusivo.</li>
+            </ul>
+        </section>
+
+        <section class="secao-ajuda">
+            <h2>Início</h2>
+            <p>Página onde pode visualizar e gerir todos os seus materiais:</p>
+            <ul>
+                <li><b>Materiais Públicos:</b> Materiais visíveis a toda a comunidade.</li>
+                <li><b>Materiais Privados:</b> Materiais visíveis apenas para si.</li>
+                <li><b>Ações disponíveis:</b> Visualização, download, alterar privacidade e eliminar materiais.</li>
+            </ul>
+        </section>
+
+        <section class="secao-ajuda">
+            <h2>Painel</h2>
+            <ul>
+                <li><b>Upload Material:</b> Permite carregar materiais do seu computador diretamente para a secção privada do perfil;</li>
+                <li><b>Converter Material:</b> Permite adaptar materiais existentes a símbolos pictográficos SPC;</li>
+                <li><b>Criar Material:</b> Permite criar materiais educativos num ambiente de edição com ferramentas de desenho e biblioteca de SPCs.</li>
+            </ul>
+        </section>
+
+        <section class="secao-ajuda">
+            <h2>Comunidade</h2>
+            <p>Conecte-se com outros educadores através de:</p>
+            <ul>
+                <li>Pesquisa pelo nome de utilizador;</li>
+                <li>Visualização de materiais públicos partilhados.</li>
+            </ul>
+        </section>
+
+        <section class="secao-ajuda">
+            <h2>Editar Perfil</h2>
+            <p>Gira as suas informações pessoais:</p>
+            <ul>
+                <li>Altere a sua foto de perfil;</li>
+                <li>Atualize o seu email;</li>
+                <li>Adicione ou modifique a sua instituição de ensino</li>
+            </ul>
+        </section>
+
+        <section class="secao-ajuda">
+            <h2>Contraste</h2>
+            <p>Permite adaptar o ambiente de visualização às condições ambientais de visibilidade à sua volta (Modo Claro e Modo Escuro de ecrã).</p>
+        </section>
+    </main>
+
+    <!-- Scripts da aplicação -->
+    <script src="assets/js/menu.js"></script>
+    <script src="assets/js/globalAvatarUpdater.js"></script>
+    <script src="assets/js/Ajudas.js"></script> 
+</body>
+</html> 

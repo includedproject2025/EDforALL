@@ -1,0 +1,290 @@
+/* ... (Seu CSS existente) ... */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(90deg, #e2e2e2, #c9d6ff);
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.profile-container {
+    display: flex;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px; /* Ajuste conforme necessário */
+    overflow: hidden; /* Para que o border-radius funcione bem com os filhos */
+}
+
+.profile-left {
+    background-color: #4a90e2; /* Azul EdEquity */
+    color: white;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 35%; /* Ajuste a largura */
+    min-width: 280px;
+}
+
+.avatar-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.avatar-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 15px;
+}
+
+.change-avatar-btn {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.change-avatar-btn i {
+    margin-right: 8px;
+}
+
+.change-avatar-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.nav-btn {
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    width: 100%;
+    text-align: left;
+    font-size: 1rem;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+.nav-btn i {
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+
+.nav-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.nav-btn.active-nav-btn {
+    background-color: rgba(255, 255, 255, 0.2);
+    font-weight: bold;
+}
+
+.profile-right {
+    padding: 40px;
+    flex-grow: 1;
+}
+
+.profile-right h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #4a90e2;
+    padding-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+.form-group input[type="text"]:read-only {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+}
+
+
+.form-group small {
+    display: block;
+    font-size: 0.8rem;
+    color: #777;
+    margin-top: 5px;
+}
+
+.save-btn {
+    background-color: #2ecc71; /* Verde */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: right; /* Para alinhar à direita no formulário */
+}
+
+.save-btn i {
+    margin-right: 8px;
+}
+
+.save-btn:hover {
+    background-color: #27ae60;
+}
+
+.back-btn {
+    background-color: #6c757d; /* Um cinza neutro */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0; /* Espaçamento do formulário */
+    float: left;
+}
+
+.back-btn i {
+    margin-right: 8px;
+}
+
+.back-btn:hover {
+    background-color: #5a6268;
+}
+
+/* Dark mode (adapte se necessário) */
+body.dark-mode {
+    background: linear-gradient(90deg, #121212, #2c2c2c);
+    color: #e0e0e0;
+}
+body.dark-mode .profile-container {
+    background-color: #1e1e1e;
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
+}
+body.dark-mode .profile-left {
+    background-color: #333; /* Um tom de azul mais escuro no modo escuro */
+}
+body.dark-mode .profile-right h2 {
+    color: #e0e0e0;
+    border-bottom-color: #555;
+}
+body.dark-mode .form-group label {
+    color: #ccc;
+}
+body.dark-mode .form-group input[type="text"],
+body.dark-mode .form-group input[type="email"],
+body.dark-mode .form-group input[type="password"] {
+    background-color: #2c2c2c;
+    border-color: #555;
+    color: #e0e0e0;
+}
+body.dark-mode .form-group input[type="text"]:read-only {
+    background-color: #3a3a3a;
+}
+body.dark-mode .form-group small {
+    color: #999;
+}
+body.dark-mode .save-btn {
+    background-color: #28a745; /* Um verde ligeiramente ajustado para dark mode */
+    color: white;
+}
+body.dark-mode .save-btn:hover {
+    background-color: #218838;
+}
+body.dark-mode .back-btn {
+    background-color: #555; /* Cor para o botão de voltar no dark mode */
+    color: white;
+}
+body.dark-mode .back-btn:hover {
+    background-color: #666;
+}
+body.dark-mode .message-container.success {
+    background-color: #1a3a2a;
+    color: #72af8f;
+    border-color: #2d5a3d;
+}
+body.dark-mode .message-container.error {
+    background-color: #4a1a1e;
+    color: #e0727c;
+    border-color: #7a2d34;
+}
+body.dark-mode .message-container.info {
+    background-color: #1a3a4a;
+    color: #72afc0;
+    border-color: #2d5a7d;
+}
+
+.message-container {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 0.9em;
+    min-height: 20px; /* Para evitar saltos de layout */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.message-container.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    opacity: 1;
+}
+
+.message-container.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    opacity: 1;
+}
+
+.message-container.info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+    opacity: 1;
+}

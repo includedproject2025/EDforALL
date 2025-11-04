@@ -1,0 +1,361 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'arial', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background-color: white;
+}
+
+/*====Configuração do perfil====*/
+.btn-perfil {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: 0.3s;
+    font-size: 45px;
+    color: black;
+}
+
+.conteudo-principal {
+    margin-left: 100px; /* Espaço para o menu fechado */
+    padding: 60px 40px;
+    transition: margin-left 0.2s ease; /* Transição suave */
+}
+
+/* Ajusta o container quando o menu está expandido */
+.menu-lateral.expandir ~ .conteudo-principal {
+    margin-left: 240px; /* Espaço para o menu expandido */
+}
+
+.titulo {
+    font-size: 22px;
+    font-weight: bold;
+    border-bottom: 2px solid black;
+    margin-bottom: 30px;
+    display: inline-block;
+    margin-top: 48px;
+    margin-left: 0; /* Removido margem esquerda para centralizar melhor */
+}
+
+.secao-material h3 {
+    margin-top: 40px;
+    margin-bottom: 15px;
+    font-size: 18px;
+    margin-left: 0; /* Removido margem esquerda para centralizar melhor */
+}
+
+.pdf-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 30px;
+    margin-left: 0; /* Removido margem esquerda para centralizar melhor */
+}
+
+.pdf-item {
+    text-align: center;
+    width: 100px;
+    word-break: break-word;
+}
+
+.pdf-item p {
+    font-size: 13px;
+    max-width: 100px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: 5px;
+}
+
+.mensagem-vazio {
+    font-style: italic;
+    color: #888;
+    margin-top: 10px;
+    margin-left: 0; /* Removido margem esquerda para centralizar melhor */
+}
+
+.priv-acoes {
+    position: fixed;
+    top: 28px;
+    right: 550px;
+    background-color: #edeceb;
+    border-radius: 20px;
+    padding: 10px 70px; 
+    display: flex;
+    gap: 35px;
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.priv-acoes button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.priv-acoes button:hover {
+    transform: scale(1.2);
+}
+
+.pub-acoes {
+    position: fixed;
+    top: 28px;
+    right: 550px;
+    background-color: #edeceb;
+    border-radius: 20px;
+    padding: 10px 70px; 
+    display: flex;
+    gap: 35px;
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.pub-acoes button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.pub-acoes button:hover {
+    transform: scale(1.2);
+}
+
+/* Estilos para o diálogo de confirmação */
+.modal-confirmacao {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-conteudo {
+    background-color: #edeceb;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.modal-conteudo h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.botoes-confirmacao {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.botao-sim, .botao-nao {
+    padding: 8px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.botao-sim {
+    background-color: black;
+    border-radius: 30px;
+    color: white;
+}
+
+.botao-nao {
+    background-color: black;
+    border-radius: 30px;
+    color: white;
+}
+
+.botao-sim:hover, .botao-nao:hover {
+    transform: scale(1.05);
+}
+
+/* Estilos para o modo escuro */
+.dark-mode .modal-conteudo {
+    background-color: #333;
+    color: white;
+}
+
+/* Estilos para o modal de visualização de PDF */
+.modal-pdf {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-pdf-conteudo {
+    background-color: #edeceb;
+    width: 90%;
+    height: 90%;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+}
+
+.modal-pdf-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #e0e0e0;
+    border-bottom: 1px solid #ccc;
+}
+
+.modal-pdf-cabecalho h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.fechar-pdf {
+    background: none;
+    border: none;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #555;
+}
+
+.fechar-pdf:hover {
+    color: black;
+}
+
+.modal-pdf-corpo {
+    flex: 1;
+    padding: 0;
+    overflow: hidden;
+}
+
+.modal-pdf-corpo iframe {
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+
+/* Media queries para responsividade */
+@media (max-width: 768px) {
+    .conteudo-principal {
+        margin-left: 80px;
+        padding: 50px 30px;
+    }
+    
+    .menu-lateral.expandir ~ .conteudo-principal {
+        margin-left: 220px;
+    }
+    
+    .titulo {
+        font-size: 20px;
+        margin-top: 40px;
+    }
+    
+    .pdf-grid {
+        gap: 20px;
+    }
+    
+    .priv-acoes, .pub-acoes {
+        right: 100px;
+        padding: 8px 30px;
+        gap: 25px;
+    }
+    
+    .priv-acoes button, .pub-acoes button {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 576px) {
+    .conteudo-principal {
+        margin-left: 70px;
+        padding: 40px 20px;
+    }
+    
+    .menu-lateral.expandir ~ .conteudo-principal {
+        margin-left: 210px;
+    }
+    
+    .titulo {
+        font-size: 18px;
+        margin-top: 30px;
+    }
+    
+    .pdf-grid {
+        justify-content: center;
+        gap: 15px;
+    }
+    
+    .priv-acoes, .pub-acoes {
+        right: 70px;
+        padding: 6px 20px;
+        gap: 20px;
+    }
+    
+    .priv-acoes button, .pub-acoes button {
+        font-size: 16px;
+    }
+}
+
+/*===MODO DARK===*/
+.dark-mode .conteudo-principal h2{
+    color: white;
+     border-bottom: 2px solid white;
+}
+.dark-mode .secao-material h3{
+    color: white;
+}
+.dark-mode .secao-material mensagem-vazio {
+    color: white;
+}
+
+ /*Parte de visualização do pdf*/
+.dark-mode .modal-pdf-conteudo {
+    background-color: #333;
+}
+.dark-mode .modal-pdf-cabecalho {
+    background-color: #444;
+    border-bottom-color: #555;
+}
+.dark-mode .modal-pdf-cabecalho h3 {
+    color: white;
+}
+.dark-mode .fechar-pdf {
+    color: #ccc;
+}
+.dark-mode .fechar-pdf:hover {
+    color: white;
+}
+
+.dark-mode .pdf-item p {
+    color: white;
+}
+

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>RegistoLogin</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <link rel="stylesheet" href="assets/css/RegistoLogin.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="form-box login">
+                <form id="loginForm">
+                    <h1>Entrar</h1>
+                    <!-- Formulário de Login -->
+                    <div class="input-box">
+                        <input type="text" name="username" placeholder="Username" required> <i class="bi bi-person-circle"></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" name="password" placeholder="Password" required> <i class="bi bi-lock-fill"></i>
+                    </div>
+                    <button type="submit" class="btn">Entrar</button>
+                </form>
+            </div>
+
+            <div class="form-box register">
+                <form id="registerForm">
+                    <h1>Registar</h1>
+                    <!-- Formulário de Registo -->
+                    <div class="input-box">
+                        <input type="text" name="username" placeholder="Username" required> <i class="bi bi-person-circle"></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="email" name="email" placeholder="Email" required> <i class="bi bi-envelope-at"></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" name="password" placeholder="Password" required> <i class="bi bi-lock-fill"></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" name="instituicao" placeholder="Instituição" required> <i class="bi bi-building"></i>
+                    </div>
+                    <button type="submit" class="btn">Registar</button>
+                </form>
+            </div>
+
+            <div class="toggle-box">
+                <div class="toggle-panel toggle-left">
+                    <h1>Bem Vindo</h1>
+                    <p>Não tem uma conta?</p>
+                    <button class="btn register-btn">Registar</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>Bem Vindo de Volta!</h1>
+                    <p>Já tem uma conta?</p>
+                    <button class="btn login-btn">Entrar</button>
+                </div>
+            </div>
+            
+        </div>
+        <script src="assets/js/RegistoLogin.js"></script>
+    </body>
+</html>

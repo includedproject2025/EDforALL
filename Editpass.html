@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterar Palavra-Passe</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="assets/css/pageEditprofile.css"> <!-- Reutiliza o CSS do perfil para consistência -->
+    <script src="assets/js/authRedirect.js"></script>
+</head>
+<body>
+    <div class="profile-container">
+        <!-- Coluna da Direita (Conteúdo Principal) -->
+        <div class="profile-right">
+            <h2>Alterar Palavra-Passe</h2>
+            <form id="changePasswordForm">
+                <div class="form-group">
+                    <label for="currentPassword">Palavra-Passe Atual:</label>
+                    <input type="password" id="currentPassword" name="currentPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">Nova Palavra-Passe:</label>
+                    <input type="password" id="newPassword" name="newPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmNewPassword">Confirmar Nova Palavra-Passe:</label>
+                    <input type="password" id="confirmNewPassword" name="confirmNewPassword" required>
+                </div>
+                <!-- Adicione esta div para exibir mensagens -->
+                <div id="passwordMessageContainer" class="message-container"></div>
+                <button type="submit" class="save-btn">
+                    <i class="bi bi-check-circle"></i> Alterar Palavra-Passe
+                </button>
+            </form>
+            <button class="back-btn" onclick="window.location.href='pageEditprofile.html'">
+                <i class="bi bi-arrow-left-circle"></i> Voltar ao Perfil
+            </button>
+        </div>
+    </div>
+    <script src="assets/js/Editpass.js"></script>
+</body>
+</html> 

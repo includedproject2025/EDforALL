@@ -1,0 +1,262 @@
+/* Estilos gerais e reset (adapte do seu CSS existente se necessário) */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    display: flex; /* Para alinhar menu lateral e conteúdo */
+    min-height: 100vh;
+}
+
+body.dark-mode {
+    background-color: #121212; /* Fundo escuro principal */
+    color: #e0e0e0; /* Texto claro */
+}
+
+.conteudo-principal {
+    margin-top: 100px;
+    flex-grow: 1;
+    padding: 60px 40px;
+    margin-left: 100px;
+    transition: margin-left 0.2s ease;
+    overflow-y: auto; 
+}
+
+.comunidade-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.titulo {
+    font-size: 22px;
+    font-weight: bold;
+    border-bottom: 2px solid black;
+    margin-bottom: 0;
+    display: inline-block;
+    margin-top: 20px;
+    margin-left: 0;
+}
+
+/* Dark mode for title */
+.dark-mode .titulo {
+    color: white;
+    border-bottom: 2px solid white;
+}
+
+
+.btn-perfil-utilizador {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    font-size: 2.5rem;
+    cursor: pointer;
+    z-index: 1001; /* Acima do menu se necessário */
+    color: #555;
+}
+
+body.dark-mode .btn-perfil-utilizador i {
+    color: #e0e0e0;
+}
+
+.btn-perfil-utilizador i:hover {
+    opacity: 0.8;
+}
+
+
+/* Cabeçalho da Comunidade */
+.cabecalho-comunidade {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.cabecalho-comunidade h1 {
+    font-size: 22px;
+    font-weight: bold;
+    border-bottom: 2px solid black;
+    margin-bottom: 30px;
+    display: inline-block;
+    margin-top: 48px;
+    margin-left: 0; /* Removido margem esquerda para centralizar melhor */
+}
+
+body.dark-mode .cabecalho-comunidade {
+    border-bottom-color: #555;
+}
+
+.cabecalho-comunidade h1 {
+    font-size: 2.2rem;
+    color: #2c3e50;
+    margin: 0;
+}
+
+body.dark-mode .cabecalho-comunidade h1 {
+    color: #e0e0e0;
+}
+
+.barra-pesquisa {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    padding: 8px 18px;
+    width: 320px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.barra-pesquisa input {
+    margin-left: 8px;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 1.1em;
+    color: #555;
+    width: 220px;
+}
+
+body.dark-mode .barra-pesquisa {
+    background-color: #2c2c2c;
+    border-color: #555;
+}
+
+.barra-pesquisa i {
+    font-size: 1.3em;
+    color: #888;
+}
+
+body.dark-mode .barra-pesquisa i {
+    color: #aaa;
+}
+
+.barra-pesquisa input[type="text"] {
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    width: 100%;
+    background-color: transparent;
+    color: #333;
+}
+
+body.dark-mode .barra-pesquisa input[type="text"] {
+    color: #e0e0e0;
+}
+
+.barra-pesquisa input[type="text"]::placeholder {
+    color: #999;
+}
+
+body.dark-mode .barra-pesquisa input[type="text"]::placeholder {
+    color: #888;
+}
+
+/* Lista de Perfis */
+.lista-perfis-container h2 {
+    font-size: 1.8rem;
+    color: #34495e;
+    margin-bottom: 20px;
+}
+body.dark-mode .lista-perfis-container h2 {
+    color: #c0c0c0;
+}
+
+.perfis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.perfil-card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    cursor: pointer; /* Indica que é clicável */
+}
+
+body.dark-mode .perfil-card {
+    background-color: #1e1e1e;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+.perfil-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(255, 255, 255, 0.15);
+}
+
+.avatar-perfil {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid #e0e0e0;
+}
+
+body.dark-mode .avatar-perfil {
+    border-color: #444;
+}
+
+.nome-perfil {
+    font-size: 1.25rem;
+    color: #2c3e50;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+body.dark-mode .nome-perfil {
+    color: #e0e0e0;
+}
+
+.instituicao-perfil {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    margin-bottom: 15px;
+}
+body.dark-mode .instituicao-perfil {
+    color: #a0a0a0;
+}
+
+.btn-ver-perfil {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+body.dark-mode .btn-ver-perfil {
+    background-color: #3a80d2; /* Azul ajustado para dark mode */
+}
+
+.btn-ver-perfil:hover {
+    background-color: #2e6cb3;
+}
+
+body.dark-mode .btn-ver-perfil:hover {
+    background-color: #2e6cb3;
+}
+
+.mensagem-vazio {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #777;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+body.dark-mode .mensagem-vazio {
+    color: #aaa;
+    background-color: #252525;
+}

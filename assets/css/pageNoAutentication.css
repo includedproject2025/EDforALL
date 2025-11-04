@@ -1,0 +1,110 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    background-size: cover;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  
+  /*--------------Configuração do logo------------------*/
+  .logo {
+    display: flex;
+    align-items: center;
+    font-weight: bolder;
+    font-size: 20px;
+  }
+  
+  .logo img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+  
+   /*--------------Configuração dos botoes------------------*/
+  .button-container {
+    position: absolute;
+    top: 12px;
+    right: 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .signin-btn {
+    background: white;
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+    border: 2px solid black;
+    border-radius: 40px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .signin-btn:hover {
+    background: black;
+    color: white;
+  }
+  
+  .login-btn {
+    background: black;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border: 2px solid black;
+    border-radius: 40px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .login-btn:hover {
+    background: white;
+    color: black;
+  }
+  
+  /*--------------Configuração das infos 1------------------*/
+  .info1-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
+    margin: 0 auto;
+    background-color: white;
+  }
+  
+  .info1-content h1 {
+    align-items: center;
+    font-size: 150px;
+    margin-top: -70px;
+  }
+  
+  .info1-content p {
+    margin: 0;
+    margin-top: -70px;
+    padding: 20px 50px;
+    background-color: #c4ceec;
+    color: white;
+    border-radius: 35px;
+    font-size: 25px;
+  }
+  
+
+  
+    

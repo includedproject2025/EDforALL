@@ -1,0 +1,908 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background-color: white;
+    display: flex; /* Usar flexbox para o layout principal */
+    flex-direction: row;
+    overflow: hidden; /* Evitar scroll do body */
+}
+
+/* Configuração do perfil */
+.btn-perfil {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: 0.3s;
+    font-size: 45px;
+    color: black;
+}
+
+/* Ícone Bootstrap */
+.icone-bootstrap {
+    font-size: 48px;
+    color: #6c757d;
+    margin-bottom: 10px;
+}
+
+.converter-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-left: 100px;
+    transition: margin-left 0.2s ease;
+}
+
+/* Ajusta o container quando o menu está expandido */
+.menu-lateral.expandir ~ .main-area-wrapper {
+    margin-left: 240px; /* Ajuste para o menu expandido */
+}
+
+/* FIXAR O MENU LATERAL */
+#menu-container {
+    flex-shrink: 0; /* Não encolher */
+    width: 120px;
+    height: 100vh;
+    z-index: 999;
+}
+
+/* Wrapper para o conteúdo principal (barra superior, canvas e toolbox) */
+.main-area-wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #efefef;
+    border-radius: 20px;
+    margin-top: 100px;
+    margin-right: 100px;
+    overflow: hidden;
+    max-height: calc(100vh - 120px);
+    transition: margin-left 0.2s ease;
+    max-width: 1100px; /* ou outro valor, para não ficar tão largo */
+}
+
+/* Área de conteúdo que contém o canvas e a toolbox */
+.content-area {
+    display: flex;
+    flex-grow: 1;
+    gap: 20px; /* Espaçamento entre canvas e toolbox */
+    margin-top: 20px; /* Espaço abaixo da top-bar */
+    overflow: hidden; /* Esconder overflow */
+}
+
+#shapes-panel {
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.canvas-wrapper {
+    flex-grow: 1;
+    overflow: auto; /* Adiciona barras de rolagem quando o conteúdo excede o tamanho */
+    background-color: #f0f0f0; /* Fundo para o wrapper */
+    border: 2px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Para posicionar o canvas dentro dele */
+    padding: 20px; /* Padding para garantir que o canvas não toque nas bordas */
+}
+
+/* Área de edição */
+.canvas {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    position: relative; /* Permite posicionamento absoluto dos itens internos */
+    flex-shrink: 0; /* Impede que o canvas encolha abaixo do seu tamanho base */
+}
+
+/* Dimensões padrão do canvas */
+.canvas.a4-vertical { width: 595px; height: 842px; }
+.canvas.a4-horizontal { width: 842px; height: 595px; }
+.canvas.a5-vertical { width: 420px; height: 595px; }
+.canvas.a5-horizontal { width: 595px; height: 420px; }
+.canvas.a3-vertical { width: 842px; height: 1191px; }
+.canvas.a3-horizontal { width: 1191px; height: 842px; }
+
+/* Ajustar canvas para caber na tela se for muito grande */
+.canvas.scaled { transform-origin: top left; }
+
+/* Barra superior com título e ferramentas de ação */
+.top-bar {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centraliza tudo */
+    position: relative; /* Para posicionar os ícones à direita */
+    background-color: #d1d1d1;
+    border-radius: 10px;
+    z-index: 15;
+}
+
+.material-title {
+    flex: 1;
+    margin-left: 30px; /* Espaço para o ícone de perfil */
+    font-weight: bold;
+    font-size: 20px; /* Maior, como na imagem */
+    color: #333;
+    letter-spacing: 0.5px;
+}
+
+.action-buttons {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 12px;
+}
+
+.action-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 5px;
+    border-radius: 3px;
+    transition: background-color 0.2s;
+}
+
+.action-button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Caixa de ferramentas */
+.toolbox {
+    flex-shrink: 0; /* Não encolher */
+    width: 300px; /* Largura fixa para a toolbox */
+    background-color: #efefef;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-radius: 20px;
+    overflow-y: auto;
+}
+
+/* Tabs de Ferramentas e Símbolos */
+.tabs {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.tab {
+    flex: 1;
+    padding: 10px;
+    background: #d1d1d1;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.tab.f {
+    border-radius: 10px 0 0 0;
+}
+
+.tab.s {
+    border-radius: 0 10px 0 0;
+}
+
+.tab.active {
+    background: #efefef;
+    color: #7494ec;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Ferramentas */
+.tool-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.tool-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.tool {
+    width: 50px;
+    height: 50px;
+    padding: 5px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer; /* Muda o cursor para mostrar que é clicável */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.tool:hover {
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.tool-icon {
+    font-size: 24px;
+    margin-bottom: 2px;
+}
+
+.tool-label {
+    font-size: 10px;
+    color: #666;
+}
+
+/*  DESIGN PARA CATEGORIAS E SÍMBOLOS */
+/* Container para a grelha de categorias */
+#symbol-categories-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.category-wrapper {
+    width: 100%;
+}
+
+.category {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    transition: all 0.2s ease-in-out;
+    width: 100%;
+    font-weight: bold;
+    color: #555;
+}
+
+.category:hover {
+    background-color: #f5f5f5;
+    border-color: #ccc;
+}
+
+.category.active {
+    background-color: #7494ec;
+    color: white;
+    border-color: #5a7bdc;
+    border-radius: 8px 8px 0 0;
+}
+
+.category-color {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Grelha de símbolos que aparece DENTRO da categoria */
+.symbols-in-category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas padrão */
+    gap: 10px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 0 0 8px 8px;
+    border: 1px solid #e0e0e0;
+    border-top: none;
+    overflow: hidden; /* Evita overflow das imagens */
+    box-sizing: border-box;
+}
+
+/* Container para resultados de pesquisa (também com 3 colunas) */
+#symbol-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas padrão */
+    gap: 10px;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+
+/* Container para um símbolo e seu texto na toolbox */
+.symbol-item-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-width: 0; /* Garante que não ultrapassa a célula */
+    box-sizing: border-box;
+}
+
+/* O símbolo (imagem) na toolbox */
+.symbol {
+    width: 60px !important;
+    height: 60px !important;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    transition: transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+    box-sizing: border-box;
+    max-width: 100%; /* Nunca ultrapassa a célula */
+    max-height: 100%;
+}
+
+.symbol:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.symbol img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.symbol-name-in-toolbox {
+    font-size: 0.75em;
+    color: #666;
+    margin-top: 4px;
+    /* Evitar que o nome seja muito longo */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+/* Propriedades */
+.properties-panel {
+    margin-top: 20px;
+    border-top: 1px solid #ccc;
+    padding-top: 15px;
+}
+
+.properties-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.property-group {
+    margin-bottom: 15px;
+}
+
+.property-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.property-label {
+    flex: 1;
+    font-size: 14px;
+}
+
+.property-control {
+    flex: 1;
+}
+
+select, input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.color-input {
+    width: 30px;
+    height: 30px;
+    border: none;
+    padding: 0;
+    border-radius: 4px;
+}
+
+/* Formatação de texto */
+.format-buttons {
+    display: flex;
+    gap: 5px;
+    margin: 10px 0;
+}
+
+.format-btn {
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.format-btn:hover {
+    background-color: #f0f0f0;
+}
+
+/* Alinhamento de texto */
+.align-buttons {
+    display: flex;
+    gap: 5px;
+    margin: 10px 0;
+}
+
+.align-btn {
+    flex: 1;
+    height: 30px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.align-btn:hover {
+    background-color: #f0f0f0;
+}
+
+/* Elementos na área de trabalho */
+.canvas-item {
+    position: absolute;
+    min-width: 30px;
+    min-height: 30px;
+    user-select: none;
+    cursor: move;
+    background-color: transparent; /* Garantir fundo transparente por padrão */
+}
+
+.canvas-item:focus, 
+.canvas-item:hover {
+    outline: 2px dashed #7494ec; /* Melhorar visualização ao passar o mouse */
+}
+
+.canvas-item.selected {
+    outline: 2px solid #7494ec;
+    box-shadow: 0 0 8px rgba(116, 148, 236, 0.5);
+}
+
+/* Estilo para o container do símbolo + texto NO CANVAS */
+.canvas-item[data-type="symbol"] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Alinha a imagem no topo */
+    padding: 5px;
+    background: transparent;
+}
+
+/* Estilo para o texto DENTRO de um símbolo no canvas */
+.symbol-text-on-canvas {
+    margin-top: 5px;
+    font-size: 12px; /* Tamanho inicial, será ajustado no resize */
+    color: black;
+    text-align: center;
+    width: 100%;
+    user-select: none; /* Não deixar selecionar o texto */
+    pointer-events: none; /* Clicar no texto não interfere com o drag do pai */
+}
+
+.canvas-item[data-type="text"] {
+    cursor: text;
+    min-width: 100px;
+    min-height: 20px;
+    padding: 5px;
+    border: 1px dashed transparent;
+    white-space: pre-wrap; /* Permitir quebra de linha automática e manual */
+}
+
+.canvas-item[data-type="text"]:hover {
+    border: 1px dashed #ccc;
+}
+
+.canvas-item[data-type="text"]:focus {
+    border: 1px solid #7494ec;
+    outline: none; /* Remover outline padrão do navegador */
+}
+/* Formas geométricas específicas */
+.canvas-item[data-type="rect"] {
+    border: 1px solid black;
+    width: 100px;
+    height: 80px;
+    background-color: transparent;
+}
+
+.canvas-item[data-type="circle"] {
+    border: 1px solid black;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: transparent;
+}
+
+.canvas-item[data-type="triangle"] {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 100px solid transparent;
+    border-bottom-color: black;
+    background-color: transparent;
+}
+
+.canvas-item[data-type="line"] {
+    width: 100px;
+    height: 1px;
+    background-color: black;
+    transform-origin: left center;
+}
+
+/* Ícones para as formas */
+[data-shape="square"] {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #000;
+}
+
+[data-shape="circle"] {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #000;
+    border-radius: 50%;
+}
+
+[data-shape="triangle"] {
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 30px solid #000;
+}
+
+/* Busca de símbolos */
+.search-box {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+
+/* Redimensionadores */
+.resizer {
+  width: 10px;
+  height: 10px;
+  background: #7494ec;
+  border: 1px solid #fff;
+  position: absolute;
+  z-index: 100; /* Deve estar acima de tudo no elemento */
+}
+
+.resizer.top-left {
+  top: -5px;
+  left: -5px;
+  cursor: nwse-resize;
+}
+
+.resizer.top-right {
+  top: -5px;
+  right: -5px;
+  cursor: nesw-resize;
+}
+
+.resizer.bottom-left {
+  bottom: -5px;
+  left: -5px;
+  cursor: nesw-resize;
+}
+
+.resizer.bottom-right {
+  bottom: -5px;
+  right: -5px;
+  cursor: nwse-resize;
+}
+
+@media (max-width: 1400px) {
+  .canvas.a3-vertical,
+  .canvas.a3-horizontal {
+    transform: scale(0.8);
+    transform-origin: top left;
+  }
+}
+
+@media (max-width: 1200px) {
+  .canvas.a4-horizontal,
+  .canvas.a3-vertical {
+    transform: scale(0.7);
+    transform-origin: top left;
+  }
+
+  .main-area-wrapper {
+    margin-left: 100px; /* Ajuste para o menu lateral */
+    padding-left: 120px; /* Espaço para o menu lateral */
+  }
+
+  .toolbox {
+    width: 250px; /* Diminuir largura da toolbox */
+  }
+}
+
+@media (max-width: 992px) {
+  body {
+    flex-direction: column; /* Mudar para coluna em telas pequenas */
+  }
+
+  #menu-container {
+    width: 100%;
+    height: auto;
+    position: relative; /* Remover fixed para se encaixar no fluxo */
+  }
+
+  .btn-perfil {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin: 10px auto; /* Centralizar botão de perfil */
+  }
+
+  .main-area-wrapper {
+    margin: 10px; /* Margem geral menor */
+    padding: 10px;
+    max-height: none; /* Remover altura máxima */
+    border-radius: 10px;
+    margin-left: 10px; /* Resetar margem esquerda */
+  }
+
+  .content-area {
+    flex-direction: column; /* Canvas e toolbox em coluna */
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .canvas {
+    min-width: 100%;
+    min-height: 300px; /* Altura mínima para o canvas em mobile */
+    width: auto !important;
+    height: auto !important; /* Permitir que o canvas ajuste sua altura */
+  }
+
+  .toolbox {
+    width: 100%; /* Toolbox ocupa toda a largura */
+    height: auto;
+    border-radius: 10px;
+  }
+
+  .top-bar {
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .action-buttons {
+    width: 100%;
+    justify-content: space-around;
+  }
+}
+
+@media (max-width: 600px) {
+  .symbols-in-category-grid,
+  #symbol-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas em telas pequenas */
+  }
+}
+
+/* DARK MODE */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0; /* Cor do texto principal no modo escuro */
+}
+
+body.dark-mode .btn-perfil {
+    color: #e0e0e0; /* Ícone de perfil no modo escuro */
+}
+
+body.dark-mode .converter-container {
+    background-color: #121212; /* Ajuste se o container principal tiver cor de fundo */
+}
+
+body.dark-mode .main-area-wrapper {
+    background-color: #1e1e1e;
+}
+
+body.dark-mode .canvas-wrapper {
+    background-color: #121212;
+    border-color: #444;
+}
+
+body.dark-mode .canvas {
+    background-color: #2c2c2c;
+    border-color: #555;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .top-bar {
+    background-color: #2c2c2c;
+}
+
+body.dark-mode .material-title {
+    color: #e0e0e0;
+}
+
+body.dark-mode .action-button {
+    color: #e0e0e0;
+}
+
+body.dark-mode .action-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .toolbox {
+    background-color: #2c2c2c;
+}
+
+body.dark-mode .tabs .tab {
+    background: #3a3a3a;
+    color: #e0e0e0;
+}
+
+body.dark-mode .tabs .tab.active {
+    background: #2c2c2c;
+    color: #8bb3ff;
+}
+
+body.dark-mode .tool {
+    background: #1e1e1e;
+    border-color: #555;
+    color: #e0e0e0;
+}
+
+body.dark-mode .tool:hover {
+    background-color: #2c2c2c;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .properties-panel {
+    border-top-color: #444;
+}
+
+body.dark-mode .properties-title,
+body.dark-mode .property-label {
+    color: #e0e0e0;
+}
+
+body.dark-mode select,
+body.dark-mode input {
+    background-color: #3a3a3a;
+    border: 1px solid #555;
+    color: #e0e0e0;
+}
+
+body.dark-mode select option {
+    background-color: #3a3a3a;
+    color: #e0e0e0;
+}
+
+body.dark-mode .format-btn,
+body.dark-mode .align-btn {
+    background-color: #3a3a3a;
+    color: #e0e0e0;
+    border-color: #555;
+}
+
+body.dark-mode .format-btn:hover,
+body.dark-mode .align-btn:hover {
+    background-color: #555;
+}
+
+body.dark-mode .canvas-item {
+    color: #e0e0e0; /* Cor padrão para texto no canvas */
+}
+
+body.dark-mode .canvas-item.selected {
+    outline-color: #8bb3ff; /* Cor de seleção no modo escuro */
+}
+
+body.dark-mode .symbol-text-on-canvas {
+    color: #e0e0e0;
+}
+
+body.dark-mode .canvas-item[data-type="rect"],
+body.dark-mode .canvas-item[data-type="circle"],
+body.dark-mode .canvas-item[data-type="triangle"],
+body.dark-mode .canvas-item[data-type="diamond"],
+body.dark-mode .canvas-item[data-type="pentagon"],
+body.dark-mode .canvas-item[data-type="hexagon"] {
+    border-color: #e0e0e0; /* Borda de formas no modo escuro */
+}
+
+body.dark-mode #symbol-categories-container .category {
+    background-color: #3a3a3a;
+    color: #e0e0e0;
+    border-color: #555;
+}
+
+body.dark-mode #symbol-categories-container .category.active {
+    background-color: #8bb3ff;
+    color: #121212;
+    border-color: #6a96df;
+}
+
+
+body.dark-mode #symbol-categories-container .category:hover {
+    background-color: #555;
+}
+
+body.dark-mode .search-box {
+    background-color: #3a3a3a;
+    border-color: #555;
+    color: #e0e0e0;
+}
+
+body.dark-mode .search-box::placeholder {
+    color: #aaa;
+}
+
+body.dark-mode .symbols-in-category-grid {
+    background-color: #222;
+    border-color: #444;
+}
+
+body.dark-mode .symbol {
+    background-color: #3a3a3a;
+    border-color: #555;
+}
+
+body.dark-mode .symbol-name-in-toolbox {
+    color: #ccc;
+}
+
+.symbols-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 10px 0;
+    justify-items: center;
+    align-items: center;
+}

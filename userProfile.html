@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Utilizador</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="assets/css/userProfile.css"> 
+    <script src="assets/js/authRedirect.js"></script>
+</head>
+<body>
+    <!-- Menu Lateral (reutilizado) -->
+    <div id="menu-container"></div>
+
+    <!-- Conteúdo Principal do Perfil -->
+    <main class="conteudo-principal-perfil">
+        
+        <!-- Secção de Informações do Utilizador (será preenchida via JS) -->
+        <header class="cabecalho-perfil" id="cabecalho-perfil">
+            <!-- Loader enquanto os dados carregam -->
+            <p>A carregar perfil...</p> 
+        </header>
+
+        <!-- Secção de Materiais Públicos -->
+        <section class="materiais-publicos">
+            <h2>Materiais Públicos</h2>
+            <div class="materiais-grid" id="materiais-grid">
+                <!-- Materiais serão carregados aqui -->
+            </div>
+            <p id="mensagem-vazio" class="mensagem-vazio" style="display: none;">Este utilizador ainda não publicou materiais.</p>
+        </section>
+
+    </main>
+    
+    <!-- Modal para Visualizar PDF -->
+    <div id="modal-pdf" class="modal">
+        <div class="modal-conteudo">
+            <span class="fechar-modal" id="fechar-pdf">×</span>
+            <h3 id="pdf-titulo"></h3>
+            <iframe id="pdf-viewer" width="100%" height="90%"></iframe>
+        </div>
+    </div>
+
+    <!-- Script da página -->
+    <script src="assets/js/userProfile.js"></script>
+</body>
+</html>

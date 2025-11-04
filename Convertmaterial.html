@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html lang="pt-pt">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de materiais</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="assets/css/Convertmaterial.css">
+    <script src="assets/js/authRedirect.js"></script>
+    <!-- Bibliotecas externas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://unpkg.com/natural@6.8.0/dist/natural-browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+</head>
+<body>
+
+    <!--Menu Lateral -->
+    <div id="menu-container"></div>
+    
+    <div class="btn-perfil" id="btn-per">
+        <img id="user-avatar" src="/uploads/avatars/default_avatar.png" alt="Avatar do Utilizador" style="width: 50px; height: 50px; border-radius: 50%; cursor: pointer;" onclick="window.location.href='pageEditprofile.html'">
+    </div>
+
+    <!-- Conteúdo principal -->
+    <main class="converter-container">
+        <h1 class="titulo-secao">Converter Material</h1>
+
+        <!-- Área de upload que é toda clicável -->
+        <label for="fileInput" class="area-upload">
+            <i class="bi bi-cloud-download icone-bootstrap"></i>
+            <span class="upload-text">Carregar Ficheiro PDF</span>
+            <input type="file" id="fileInput" accept=".pdf" hidden>
+        </label>        
+
+        <div class="buttons-container">
+            <button class="btn-converter" disabled>Selecione um PDF</button>
+        </div>
+
+        <!-- Container para mostrar o progresso -->
+        <div id="progress-container" style="display: none;">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+            </div>
+            <p id="progress-text">Processando PDF...</p>
+        </div>
+
+        <!-- Container para o conteúdo convertido -->
+        <div id="content-container" class="content-container"></div>
+
+        <!-- Container para opções de privacidade e download -->
+        <div id="options-container" class="options-container" style="display: none;">
+            <div class="privacy-options">
+                <button class="btn-privacy" id="btn-private">
+                    <i class="bi bi-lock"></i> Manter Privado
+                </button>
+            </div>
+            <div class="download-options">
+                <button class="btn-download-final" id="btn-download-final">
+                    <i class="bi bi-download"></i> Download
+                </button>
+            </div>
+        </div>
+    </main>       
+
+    <!-- Scripts da aplicação -->
+    <script src="assets/js/menu.js"></script>
+    <script src="assets/js/globalAvatarUpdater.js"></script>
+    <script src="assets/js/Convertmaterial.js"></script>
+</body>
+</html>

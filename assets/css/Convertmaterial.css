@@ -1,0 +1,688 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'arial', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background-color: white;
+}
+
+/*====Configuração do perfil====*/
+.btn-perfil {
+    position:absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: 0.3s;
+    font-size: 45px;
+    color: black;
+}
+
+/*====Ícone Bootstrap====*/
+.icone-bootstrap {
+    font-size: 48px;
+    color: #6c757d;
+    margin-bottom: 10px;
+}
+
+.converter-container {
+    margin-left: 100px; /* Espaço para o menu fechado */
+    padding: 60px 40px;
+    transition: margin-left 0.2s ease; /* Transição suave */
+}
+
+/* Ajusta o container quando o menu está expandido */
+.menu-lateral.expandir ~ main.converter-container {
+    margin-left: 240px;
+}
+
+.titulo-secao {
+    font-size: 22px;
+    font-weight: bold;
+    border-bottom: 2px solid black;
+    margin-bottom: 30px;
+    display: inline-block;
+    margin-top: 48px;
+    margin-left: 0; /* Removido margem esquerda para centralizar melhor */
+}
+
+.area-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.area-upload:hover {
+    border-color: #007bff;
+    background-color: #f8f9fa;
+}
+
+.upload-text {
+    color: #6c757d;
+    font-size: 18px;
+}
+
+.buttons-container {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.btn-converter{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+    min-width: 150px;
+}
+
+.btn-converter {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-converter:hover:not(:disabled) {
+    opacity: 0.9;
+}
+
+.btn-converter:disabled{
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Modo escuro */
+body.dark-mode .btn-converter:disabled{
+    background-color: #444;
+    color: #888;
+}
+
+/* Estilos para o container de progresso */
+#progress-container {
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.progress {
+    height: 20px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #007bff;
+    transition: width 0.3s ease;
+}
+
+#progress-text {
+    text-align: center;
+    color: #6c757d;
+    margin: 0;
+}
+
+/* Estilos para o container de conteúdo */
+.content-container {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 100%;
+    overflow-x: auto;
+    max-width: calc(100vw - 120px);
+    transition: max-width 0.2s ease;
+}
+
+/* Estilos para estrutura do documento */
+.document-wrapper {
+    min-height: 800px;
+    position: relative;
+    padding-top: 30px;
+    margin-bottom: 50px;
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 3px;
+}
+
+.page-start {
+    height: 40px;
+    width: 100%;
+    position: relative;
+}
+
+.page-content {
+    margin-bottom: 30px;
+    padding: 0 25px 20px;
+    border-bottom: 2px dashed #eee;
+}
+
+.page-spacer {
+    height: 30px;
+    width: 100%;
+    position: relative;
+}
+
+body.dark-mode .document-wrapper {
+    background-color: #333;
+    border-color: #444;
+}
+
+body.dark-mode .page-content {
+    border-bottom-color: #444;
+}
+
+/* Ajusta o tamanho do container de conteúdo quando o menu está expandido */
+.menu-lateral.expandir ~ main.converter-container .content-container {
+    max-width: calc(100vw - 260px);
+}
+
+.line-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px;
+    min-height: 80px;
+}
+
+.word-container {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 80px;
+}
+
+.word-image {
+    max-height: 50px;
+    width: auto;
+    object-fit: contain;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: white;
+    transition: transform 0.2s ease;
+}
+
+.word-text {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.text-only {
+    font-size: 16px;
+    color: #333;
+    padding: 5px;
+    text-align: center;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.word-space {
+    display: inline-block;
+    width: 4px;
+}
+
+/* Modo escuro */
+body.dark-mode .content-container {
+    background-color: #2a2a2a;
+}
+
+body.dark-mode .text-only {
+    color: #fff;
+}
+
+body.dark-mode .word-text {
+    color: #ccc;
+}
+
+/* Hover effects */
+.word-image:hover {
+    transform: scale(1.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Cor no modo escuro */
+body.dark-mode .titulo-secao {
+    color: white;
+    border-bottom: 2px solid white;
+}
+
+body.dark-mode .word-text {
+    color: white;
+}
+
+.no-images-message {
+    text-align: center;
+    color: #666;
+    padding: 20px;
+    font-size: 16px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+body.dark-mode .no-images-message {
+    color: #ccc;
+    background-color: #2a2a2a;
+}
+
+/* Estilos para a seção de palavras sem imagens */
+.no-images-section {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.no-images-title {
+    color: #333;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.words-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.word-item {
+    background-color: #e9ecef;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #495057;
+    font-size: 14px;
+}
+
+/* Modo escuro para a seção de palavras sem imagens */
+body.dark-mode .no-images-section {
+    background-color: #2a2a2a;
+}
+
+body.dark-mode .no-images-title {
+    color: #fff;
+    border-bottom-color: #444;
+}
+
+body.dark-mode .word-item {
+    background-color: #444;
+    color: #fff;
+}
+
+.punctuation {
+    font-size: 16px;
+    color: #333;
+    padding: 0 2px;
+    display: inline-flex;
+    align-items: center;
+    height: 50px;
+}
+
+body.dark-mode .punctuation {
+    color: #fff;
+}
+
+.linha {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Estilos para o container de opções */
+.options-container {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.privacy-options, .download-options {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.btn-privacy, .btn-download-final {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-privacy {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-privacy:hover {
+    opacity: 0.9;
+}
+
+.btn-download-final {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-download-final:hover {
+    opacity: 0.9;
+}
+
+/* Estilos para botões desabilitados */
+.btn-privacy:disabled, .btn-download-final:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    position: relative;
+}
+
+/* Estilo para indicar sucesso */
+.btn-privacy:disabled i.bi-check-circle, 
+.btn-download-final:disabled i.bi-check-circle {
+    color: #a3ffa3;
+}
+
+/* Estilo para indicar erro */
+.btn-privacy:disabled i.bi-exclamation-triangle, 
+.btn-download-final:disabled i.bi-exclamation-triangle {
+    color: #ffcccc;
+}
+
+/* Estilo para indicar carregamento */
+.btn-privacy:disabled i.bi-hourglass-split, 
+.btn-download-final:disabled i.bi-hourglass-split,
+.btn-privacy:disabled i.bi-arrow-counterclockwise,
+.btn-download-final:disabled i.bi-arrow-counterclockwise {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Estilo para a barra de progresso */
+.saving-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    color: white;
+}
+
+.saving-progress .progress {
+    width: 80%;
+    max-width: 500px;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.saving-progress .progress-bar {
+    height: 100%;
+    background: linear-gradient(45deg, #007bff, #00c9ff);
+    background-size: 200% 200%;
+    animation: gradientAnimation 2s ease infinite;
+}
+
+.saving-progress p {
+    font-size: 18px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Modo escuro */
+body.dark-mode .options-container {
+    background-color: #343a40;
+}
+
+body.dark-mode .btn-privacy {
+    background-color: #495057;
+}
+
+body.dark-mode .btn-download-final {
+    background-color: #218838;
+}
+
+/* Media queries para design responsivo */
+@media (max-width: 768px) {
+    .converter-container {
+        margin-left: 80px; /* Espaço menor para o menu fechado em telas pequenas */
+        padding: 10px;
+    }
+    
+    .menu-lateral.expandir ~ main.converter-container {
+        margin-left: 220px; /* Espaço menor para o menu expandido em telas pequenas */
+    }
+    
+    .content-container {
+        max-width: calc(100vw - 100px);
+        padding: 10px;
+    }
+    
+    .menu-lateral.expandir ~ main.converter-container .content-container {
+        max-width: calc(100vw - 240px);
+    }
+    
+    .buttons-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn-converter, 
+    .btn-download {
+        width: 100%;
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+    .converter-container {
+        margin-left: 70px; /* Espaço ainda menor para o menu fechado em telas muito pequenas */
+    }
+    
+    .menu-lateral.expandir ~ main.converter-container {
+        margin-left: 210px; /* Espaço ainda menor para o menu expandido em telas muito pequenas */
+    }
+    
+    .content-container {
+        max-width: calc(100vw - 80px);
+        padding: 8px;
+    }
+    
+    .menu-lateral.expandir ~ main.converter-container .content-container {
+        max-width: calc(100vw - 220px);
+    }
+    
+    .titulo-secao {
+        font-size: 1.5rem;
+    }
+    
+    .word-container {
+        min-height: 70px;
+    }
+    
+    .word-image {
+        max-height: 40px;
+    }
+    
+    .text-only {
+        font-size: 14px;
+        height: 40px;
+    }
+}
+
+/* Modo escuro */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.dark-mode .btn-perfil {
+    color: #e0e0e0;
+}
+
+body.dark-mode .icone-bootstrap {
+    color: #b0b0b0;
+}
+
+body.dark-mode .converter-container {
+    /* Ajuste se o container principal tiver cor de fundo específica */
+    background-color: #121212;
+}
+
+body.dark-mode .titulo-secao {
+    color: #e0e0e0;
+    border-bottom-color: #e0e0e0;
+}
+
+body.dark-mode .area-upload {
+    border-color: #555;
+    background-color: #1e1e1e;
+}
+
+body.dark-mode .area-upload:hover {
+    border-color: #8bb3ff;
+    background-color: #2c2c2c;
+}
+
+body.dark-mode .upload-text {
+    color: #e0e0e0;
+}
+
+body.dark-mode .btn-converter {
+    background-color: #6b9cff;
+    color: #1e1e1e;
+}
+
+body.dark-mode .btn-converter:hover:not(:disabled) {
+    background-color: #8bb3ff;
+}
+
+body.dark-mode .progress {
+    background-color: #2c2c2c;
+}
+
+body.dark-mode .progress-bar {
+    background-color: #8bb3ff;
+}
+
+body.dark-mode #progress-text {
+    color: #e0e0e0;
+}
+
+body.dark-mode .content-container {
+    background-color: #1e1e1e;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .document-wrapper {
+    background-color: #2c2c2c;
+    border-color: #444;
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .page-content {
+    border-bottom-color: #444;
+}
+
+body.dark-mode .word-image {
+    background-color: #2c2c2c;
+    border-color: #555;
+}
+
+body.dark-mode .word-text {
+    color: #e0e0e0;
+}
+
+body.dark-mode .text-only {
+    color: #e0e0e0;
+}
+
+body.dark-mode .punctuation {
+    color: #e0e0e0;
+}
+
+body.dark-mode .options-container {
+    background-color: #121212;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .btn-privacy,
+body.dark-mode .btn-download-final {
+    background-color: #3a3a3a;
+    color: #e0e0e0;
+}
+
+body.dark-mode .btn-privacy:hover,
+body.dark-mode .btn-download-final:hover {
+    background-color: #555;
+}
+
+body.dark-mode .btn-privacy:disabled,
+body.dark-mode .btn-download-final:disabled {
+    background-color: #444;
+    color: #888;
+}
+
+body.dark-mode .saving-progress .progress {
+    background-color: #2c2c2c;
+}
+
+body.dark-mode .saving-progress .progress-bar {
+    background-color: #8bb3ff;
+}
+
+body.dark-mode .saving-progress p {
+    color: #e0e0e0;
+}

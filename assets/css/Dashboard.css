@@ -1,0 +1,378 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'arial', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background-color: white;
+}
+
+/* DARK MODE */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0; /* Cor do texto principal no modo escuro */
+}
+
+body.dark-mode .btn-perfil {
+    color: #e0e0e0; /* Ícone de perfil no modo escuro */
+}
+
+body.dark-mode .card {
+    background-color: #1e1e1e;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1); /* Sombra mais clara */
+}
+
+body.dark-mode .card h2,
+body.dark-mode .card p {
+    color: #e0e0e0; /* Títulos e parágrafos dos cards no modo escuro */
+}
+
+body.dark-mode .card-btn,
+body.dark-mode .card1-btn {
+    background-color: #333;
+    color: #e0e0e0;
+}
+
+body.dark-mode .card-btn:hover,
+body.dark-mode .card1-btn:hover {
+    background-color: #555;
+}
+
+body.dark-mode .modal-content {
+    background: #2c2c2c;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+body.dark-mode .modal-content header {
+    color: #e0e0e0;
+    border-bottom-color: #e0e0e0;
+}
+
+body.dark-mode .modal-content label {
+    color: #e0e0e0;
+}
+
+body.dark-mode .modal-content input,
+body.dark-mode .modal-content select {
+    background-color: #3a3a3a;
+    border: 1px solid #555;
+    color: #e0e0e0;
+}
+
+body.dark-mode .modal-content select option {
+    background-color: #3a3a3a;
+    color: #e0e0e0;
+}
+
+body.dark-mode .radio-label {
+    color: #e0e0e0;
+}
+
+body.dark-mode .custom-radio {
+    background-color: #3a3a3a;
+    border-color: #555;
+}
+
+body.dark-mode .radio-label input[type="radio"]:checked + .custom-radio {
+    background-color: #8bb3ff; /* Um azul mais claro para o modo escuro */
+    box-shadow: 0 0 0 1px rgba(139, 179, 255, 0.5);
+}
+
+body.dark-mode .btn-cancel {
+    background-color: #444;
+    color: #e0e0e0;
+}
+
+body.dark-mode .btn-cancel:hover {
+    background-color: #666;
+}
+
+body.dark-mode .btn-check {
+    color: #8bb3ff;
+}
+
+body.dark-mode .btn-check:hover {
+    color: #aaccff;
+}
+
+/*Configuração do perfil*/
+.btn-perfil {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: 0.3s;
+    font-size: 45px;
+    color: black;
+}
+
+/* Estilo da área principal */
+.conteudo-principal {
+    margin-left: 100px;
+    padding: 60px 40px;
+    transition: margin-left 0.2s ease; /* Transição suave */
+}
+
+/* Ajusta o container quando o menu está expandido */
+.menu-lateral.expandir ~ .conteudo-principal {
+    margin-left: 240px; /* Espaço para o menu expandido */
+}
+
+/* Container dos cards */
+.cards-container {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Estilo de cada card */
+.card {
+    background-color: #f4f4f3;
+    border-radius: 25px;
+    padding: 90px 50px;
+    max-width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: black;
+}
+
+.card p {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+/* Botões dos cards */
+.card-btn {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    font-weight: bold;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: auto; /* Adicionado para empurrar o botão para o fundo */
+}
+
+.card-btn:hover {
+    background-color: #333; /* Cor mais clara no hover */
+}
+
+.card1-btn {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    font-weight: bold;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: auto; /* Alterado de 32px para auto */
+}
+
+.card1-btn:hover {
+    background-color: #333; /* Cor mais clara no hover */
+}
+
+/* ---------------- MODAL DO CARD 3 ------------------- */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 50px 30px;
+    border-radius: 12px;
+    width: 500px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    position: relative;    
+    padding-bottom: 70px; /* espaço para o botão não sobrepor conteúdo */
+}
+
+.modal-content header {
+    font-weight: bold;
+    font-size: 19px;
+    margin-top: -20px;
+    border-bottom: 2px solid black;
+    width: 30%; /* Largura da linha */
+    padding-bottom: 3px; /* Espaço entre o título e a linha */
+    margin-bottom: 20px; /* Espaço entre o título e o conteúdo de baixo */
+}
+
+.modal-content label {
+    display: block;
+    margin: 10px 0 8px 20px; /* margem superior, 0, margem inferior, margem esquerda */
+}
+
+/*estilo caixa de texto e combobox*/
+.modal-content input,
+.modal-content select {
+    width: 84%;
+    margin: 0 0 3px 20px; /* margem inferior e esquerda */
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #c4ceec;
+    background-color: #c4ceec;
+}
+
+/*cor das opcoes da combobox aberta!*/
+.modal-content select option {
+    background-color: white;
+    color: black;
+}
+
+.radio-group {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 10px; /* espaço controlado abaixo */
+}
+
+/* texto do rbtn*/
+.radio-label {
+    align-items: center;
+    font-size: 16px;
+    position: relative;
+    padding-left: 30px; 
+    color: black;
+    /*margin-left: 100px;
+    margin-top: -35px;*/
+    margin: 0;
+}
+
+/* Esconde o radio original */
+.radio-label input[type="radio"] {
+  opacity: 0;
+  position: absolute;
+}
+
+/* rbtn */
+.custom-radio {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 18px;
+  width: 18px;
+  background-color: white;
+  border: 2px solid #c4ceec;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+/* rbtn quando selecionado */
+.radio-label input[type="radio"]:checked + .custom-radio {
+  background-color: #6b9cff;
+  box-shadow: 0 0 0 1px rgba(196, 206, 236);
+}
+
+.modal-buttons {
+  position: absolute;
+  bottom: 20px;
+  right: 30px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.btn-cancel {
+  background-color: #ccc;
+  color: #333;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-cancel:hover {
+  background-color: #bbb;
+}
+
+.btn-check {
+    /*position: absolute;
+    bottom: 20px;
+    right: 30px;*/
+
+    color: #6b9cff;
+    font-size: 35px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.btn-check:hover {
+  color: #5a8cff;
+}
+
+/* ---------------- FIM MODAL DO CARD 3 ------------------- */
+
+
+/* Media queries para design responsivo */
+@media (max-width: 768px) {
+    .conteudo-principal {
+        margin-left: 80px; /* Espaço menor para o menu fechado em telas pequenas */
+        padding: 40px 20px;
+    }
+    
+    .menu-lateral.expandir ~ .conteudo-principal {
+        margin-left: 220px; /* Espaço menor para o menu expandido em telas pequenas */
+    }
+    
+    .cards-container {
+        gap: 20px;
+    }
+    
+    .card {
+        padding: 60px 30px;
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 576px) {
+    .conteudo-principal {
+        margin-left: 70px; /* Espaço ainda menor para o menu fechado em telas muito pequenas */
+        padding: 30px 15px;
+    }
+    
+    .menu-lateral.expandir ~ .conteudo-principal {
+        margin-left: 210px; /* Espaço ainda menor para o menu expandido em telas muito pequenas */
+    }
+    
+    .cards-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .card {
+        max-width: 100%;
+        width: 100%;
+        margin-top: 50px;
+    }
+}
+
