@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
+    font-family:'Nunito Sans', sans-serif;
     background-size: cover;
     background-position: bottom;
     background-repeat: no-repeat;
@@ -106,5 +106,48 @@ body {
   }
   
 
-  
-    
+ @font-face {
+  font-family: 'Super Joyful';
+  src: url('Super Joyful.ttf') format('truetype');
+}
+
+.joyful {
+  font-family: 'Super Joyful', sans-serif;
+  font-weight: normal;
+  font-size: 1.2em; /* opcional */
+  color: #333232; /* podes mudar a cor também */
+}
+
+    @font-face {
+      font-family: 'HeadingNow';
+      src: url('HeadingNowTrial-65Medium.ttf') format('truetype');
+    }
+    .headingnow {
+  font-family: 'HeadingNow', sans-serif;
+  font-weight: normal;
+  font-size: 1.2em; /* opcional */
+  color: #000000; /* podes mudar a cor também */
+}
+ @font-face {
+  font-family: 'Huglove';
+  src: url('Huglove.ttf') format('truetype');
+}
+
+.Huglove {
+  font-family: 'Huglove', sans-serif;
+  font-weight: normal;
+  font-size: 1.2em; /* opcional */
+  color: #333232; /* podes mudar a cor também */
+}
+
+ @font-face {
+  font-family: 'KGPerfectPenmanship';
+  src: url('KGPerfectPenmanship.ttf') format('truetype');
+}
+
+.KGPerfectPenmanship{
+  font-family: 'KGPerfectPenmanship', sans-serif;
+  font-weight: normal;
+  font-size: 1.2em; /* opcional */
+  color: #000000; /* podes mudar a cor também */
+}
