@@ -1,40 +1,454 @@
 <!DOCTYPE html>
 <html lang="pt">
 
-    <!--Introdu  ca o de conteudo com meta dados e ligacoes-->
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ED-for-ALL</title>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ED-for-ALL</title>
 
-        <!--Link para o ficheiro CSS-->
-        <link rel="stylesheet" href="assets/css/pageNoAutentication.css">
-    </head>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <!--Conteudo visivel na web-->
-    <body>
-        <!--Contrucao do cabecalho da pagina-->
-        <header>
-            <!--Icon e titulo de app-->
-            <div class="logo">
-                <img width="26" height="26" src="https://img.icons8.com/metro/26/graduation-cap.png" alt="graduation-cap"/>
-               <b><span class="KGPerfectPenmanship" style="padding-right: 4px;">ED</span></b><span class="Huglove">for</span><b><span class="KGPerfectPenmanship" style="padding-right: 4px;">ALL</span></b>
+        :root {
+            --bg-gradient-top: #f0f4ff;
+            --bg-gradient-bottom: #dde6ff;
+            --accent: #4b6bff;
+            --accent-soft: #eef1ff;
+            --text-main: #1f2933;
+            --text-subtle: #6b7280;
+            --paper-shadow: 0 18px 45px rgba(15, 23, 42, 0.18);
+            --radius-lg: 24px;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top, var(--bg-gradient-top), var(--bg-gradient-bottom));
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            color: var(--text-main);
+        }
+
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            padding: 0 6vw;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(12px);
+            background: linear-gradient(to bottom,
+                    rgba(255, 255, 255, 0.9),
+                    rgba(255, 255, 255, 0.75),
+                    transparent);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+            z-index: 10;
+        }
+
+
+        .logo img {
+            filter: drop-shadow(0 1px 2px rgba(15, 23, 42, 0.2));
+        }
+
+        /* Fonte Huglove */
+        .Huglove {
+            font-family: 'Huglove', sans-serif;
+            font-weight: normal;
+            font-size: 1.2em;
+            color: #333232;
+        }
+
+        /* Fonte KGPerfectPenmanship */
+        @font-face {
+            font-family: 'KGPerfectPenmanship';
+            src: url('KGPerfectPenmanship.ttf') format('truetype');
+        }
+
+        .KGPerfectPenmanship {
+            font-family: 'KGPerfectPenmanship', sans-serif;
+            font-weight: normal;
+            font-size: 1.2em;
+            color: #000000;
+        }
+
+        .button-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .button-container button {
+            border-radius: 999px;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: transform 0.1s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+        }
+
+        .login-btn {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.35);
+        }
+
+        .login-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 30px rgba(79, 70, 229, 0.4);
+        }
+
+        .signin-btn {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--text-main);
+            border-color: rgba(148, 163, 184, 0.6);
+        }
+
+        .signin-btn:hover {
+            background: white;
+            transform: translateY(-1px);
+            box-shadow: 0 10px 22px rgba(148, 163, 184, 0.35);
+        }
+
+        /* CONTAINER GERAL */
+        .page-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 90px 16px 32px;
+            /* espaço por causa do header fixo */
+        }
+
+        /* “Papel A4” */
+        .paper {
+            position: relative;
+            background: white;
+            max-width: 900px;
+            width: min(900px, 100%);
+            min-height: 60vh;
+            padding: 48px clamp(32px, 6vw, 60px);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--paper-shadow);
+            overflow: hidden;
+        }
+
+        /* Sombra extra para parecer papel */
+        .paper::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius-lg);
+            background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.7), transparent);
+            pointer-events: none;
+        }
+
+        .paper::after {
+            content: "";
+            position: absolute;
+            inset: 16px;
+            border-radius: 18px;
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            pointer-events: none;
+        }
+
+        .paper-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .info1-content {
+            text-align: left;
+            max-width: 520px;
+        }
+
+        .info1-content h1 {
+            font-size: clamp(2.4rem, 4vw, 3rem);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .info1-content h1 .KGPerfectPenmanship {
+            font-size: 1.15em;
+        }
+
+        .info1-content h1 .Huglove {
+            font-size: 0.8em;
+            color: var(--accent);
+        }
+
+        .info1-content h2 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: var(--text-subtle);
+            margin-bottom: 18px;
+        }
+
+        .info1-content p {
+            font-size: 0.98rem;
+            line-height: 1.6;
+            color: var(--text-subtle);
+            margin-bottom: 28px;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-size: 0.8rem;
+            margin-bottom: 16px;
+        }
+
+        .pill-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: var(--accent);
+        }
+
+        .cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .cta-primary,
+        .cta-secondary {
+            border-radius: 999px;
+            padding: 10px 20px;
+            font-size: 0.92rem;
+            cursor: pointer;
+            border: 1px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.1s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+        }
+
+        .cta-primary {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 10px 26px rgba(79, 70, 229, 0.35);
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 32px rgba(79, 70, 229, 0.45);
+        }
+
+        .cta-secondary {
+            background: white;
+            color: var(--text-main);
+            border-color: rgba(148, 163, 184, 0.7);
+        }
+
+        .cta-secondary:hover {
+            background: #f9fafb;
+            transform: translateY(-1px);
+            box-shadow: 0 10px 22px rgba(148, 163, 184, 0.3);
+        }
+
+        .small-note {
+            font-size: 0.78rem;
+            color: var(--text-subtle);
+        }
+
+        /* Coluna direita decorativa no “papel” */
+        .paper-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.1fr);
+            gap: 32px;
+            align-items: center;
+        }
+
+        .paper-side-card {
+            border-radius: 18px;
+            padding: 18px 20px;
+            background: linear-gradient(135deg, #eef2ff, #e0f2fe);
+            box-shadow: 0 12px 30px rgba(148, 163, 184, 0.35);
+            font-size: 0.88rem;
+        }
+
+        .paper-side-card h3 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .paper-side-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .paper-side-card li {
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+
+        .paper-bullet {
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            margin-top: 6px;
+            background: rgba(15, 23, 42, 0.7);
+        }
+
+        @media (max-width: 800px) {
+            header {
+                padding: 0 16px;
+            }
+
+            .page-wrapper {
+                padding: 90px 12px 24px;
+            }
+
+            .paper {
+                padding: 26px 18px 26px;
+                border-radius: 18px;
+            }
+
+            .paper::after {
+                inset: 10px;
+                border-radius: 14px;
+            }
+
+            .paper-layout {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .info1-content {
+                max-width: 100%;
+            }
+
+            .button-container button {
+                padding-inline: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .button-container {
+                gap: 6px;
+            }
+
+            .button-container button {
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+
+            .info1-content h1 {
+                font-size: 2rem;
+            }
+
+            .info1-content h2 {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="logo">
+            <img width="26" height="26" src="https://img.icons8.com/metro/26/graduation-cap.png" alt="graduation-cap" />
+            <b><span class="KGPerfectPenmanship" style="padding-right: 4px;">ED</span></b>
+            <span class="Huglove">for</span>
+            <b><span class="KGPerfectPenmanship" style="padding-right: 4px;">ALL</span></b>
+        </div>
+
+        <div class="button-container">
+            <button class="signin-btn" onclick="window.location.href='RegistoLogin.html?modo=registo'">Sign in</button>
+            <button class="login-btn" onclick="window.location.href='RegistoLogin.html?modo=login'">Login</button>
+        </div>
+    </header>
+
+    <!-- Área central com o “papel A4” -->
+    <div class="page-wrapper">
+        <div class="paper">
+            <div class="paper-inner">
+                <div class="paper-layout">
+                    <!-- Lado esquerdo: título e texto -->
+                    <div class="info1-content">
+                        <div class="pill">
+                            <span class="pill-dot"></span>
+                            Plataforma inclusiva para professores
+                        </div>
+
+                        <h1>
+                            <b><span class="KGPerfectPenmanship" style="padding-right: 4px;">ED</span></b><span
+                                class="Huglove">for</span>
+                            <b><span class="KGPerfectPenmanship" style="padding-right: 4px;">ALL</span></b>
+                        </h1>
+
+                        <h2>Educação para todos</h2>
+
+                        <p>
+                            Adaptação de materiais para diferentes necessidades educativas especiais.
+                            Personaliza, organiza e partilha recursos num único espaço, pensado para ser simples
+                            para o professor e acessível para cada aluno.
+                        </p>
+
+                        <div class="cta-row">
+                            <button class="cta-primary" onclick="window.location.href='RegistoLogin.html?modo=registo'">
+                                Começar agora
+                            </button>
+                            <button class="cta-secondary" onclick="window.location.href='RegistoLogin.html?modo=login'">
+                                Já tenho conta
+                            </button>
+                        </div>
+
+                        <p class="small-note">
+                            Sem complicações: entra, escolhe a turma e começa a adaptar os conteúdos em poucos cliques.
+                        </p>
+                    </div>
+
+                    <!-- Lado direito: “cartão” dentro da folha -->
+                    <div class="paper-side-card">
+                        <h3>O que podes fazer no EDforALL?</h3>
+                        <ul>
+                            <li>
+                                <span class="paper-bullet"></span>
+                                <span>Centralizar materiais para todas as turmas e alunos.</span>
+                            </li>
+                            <li>
+                                <span class="paper-bullet"></span>
+                                <span>Adaptar textos, fichas e exercícios para diferentes perfis.</span>
+                            </li>
+                            <li>
+                                <span class="paper-bullet"></span>
+                                <span>Partilhar recursos com colegas de forma rápida.</span>
+                            </li>
+                            <li>
+                                <span class="paper-bullet"></span>
+                                <span>Acompanhar o progresso de cada aluno com maior clareza.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
+        </div>
+    </div>
+</body>
 
-            <!--Button Login and sign in já conectados com o login e sign in atraves do modo-->
-            <div class="button-container">
-                <button class="signin-btn" onclick="window.location.href='RegistoLogin.html?modo=registo'">Sign in</button>
-                <button class="login-btn" onclick="window.location.href='RegistoLogin.html?modo=login'">Login</button>
-            </div>
-            
-        </header>
-
-        <!--Conteudo que vai aparecer na restante pagina-->
-        <div class="info1-content">
-            <h1> <b><span class="KGPerfectPenmanship" style="padding-right: 4px;">ED</span></b><span class="Huglove">for</span><b><span class="KGPerfectPenmanship" style="padding-right: 4px;">ALL</span></b></h1>
-            <h2>Educação para todos </h2>
-           <!-- <p>Adaptação de materiais para diferentes necessidades educativas<br>especiais. Personalização e partilha recursos com facilidade.</p>-->
-        </div>          
-    </body>
 </html>
