@@ -1,153 +1,353 @@
-body {
+/* Reset básico */
+* {
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
-    font-family:'Nunito Sans', sans-serif;
-    background-size: cover;
-    background-position: bottom;
-    background-repeat: no-repeat;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-gradient-top: #f0f4ff;
+    --bg-gradient-bottom: #dde6ff;
+    --accent: #4b6bff;
+    --accent-soft: #eef1ff;
+    --text-main: #1f2933;
+    --text-subtle: #6b7280;
+    --paper-shadow: 0 18px 45px rgba(15, 23, 42, 0.18);
+    --radius-lg: 24px;
+}
+
+body {
     min-height: 100vh;
-    overflow: hidden;
-  }
-  
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 50px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-
-  
-  /*--------------Configuração do logo------------------*/
-  .logo {
-    display: flex;
-    align-items: center;
-    font-weight: bolder;
-    font-size: 20px;
-  }
-  
-  .logo img {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
-  }
-  
-   /*--------------Configuração dos botoes------------------*/
-  .button-container {
-    position: absolute;
-    top: 12px;
-    right: 30px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-  
-  .signin-btn {
-    background: white;
-    color: black;
-    font-size: 12px;
-    font-weight: bold;
-    border: 2px solid black;
-    border-radius: 40px;
-    padding: 10px 15px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .signin-btn:hover {
-    background: black;
-    color: white;
-  }
-  
-  .login-btn {
-    background: black;
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
-    border: 2px solid black;
-    border-radius: 40px;
-    padding: 10px 15px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .login-btn:hover {
-    background: white;
-    color: black;
-  }
-  
-  /*--------------Configuração das infos 1------------------*/
-  .info1-content {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: radial-gradient(circle at top, var(--bg-gradient-top), var(--bg-gradient-bottom));
     display: flex;
     flex-direction: column;
+    align-items: stretch;
+    color: var(--text-main);
+}
+
+/* HEADER */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    padding: 0 6vw;
+    display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    height: 100vh;
-    margin: 0 auto;
-    background-color: white;
-  }
-  
-  .info1-content h1 {
+    justify-content: space-between;
+    backdrop-filter: blur(12px);
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.9),
+        rgba(255, 255, 255, 0.75),
+        transparent
+    );
+    border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+    z-index: 10;
+}
+
+.logo {
+    display: flex;
     align-items: center;
-    font-size: 150px;
-    margin-top: -70px;
-  }
-  
-  .info1-content p {
-    margin: 0;
-    margin-top: -70px;
-    padding: 20px 50px;
-    background-color: #c4ceec;
+    gap: 8px;
+    font-size: 1.4rem;
+}
+
+.logo img {
+    filter: drop-shadow(0 1px 2px rgba(15, 23, 42, 0.2));
+}
+
+/* Mantendo as letras originais da logo */
+.logo .KGPerfectPenmanship {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.logo .Huglove {
+    font-size: 1.1rem;
+    margin: 0 2px;
+    color: var(--accent);
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.button-container button {
+    border-radius: 999px;
+    padding: 8px 20px;
+    font-size: 0.9rem;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.login-btn {
+    background: var(--accent);
     color: white;
-    border-radius: 35px;
-    font-size: 25px;
-  }
-  
-
- @font-face {
-  font-family: 'Super Joyful';
-  src: url('Super Joyful.ttf') format('truetype');
+    box-shadow: 0 10px 25px rgba(79, 70, 229, 0.35);
 }
 
-.joyful {
-  font-family: 'Super Joyful', sans-serif;
-  font-weight: normal;
-  font-size: 1.2em; /* opcional */
-  color: #333232; /* podes mudar a cor também */
+.login-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 30px rgba(79, 70, 229, 0.4);
 }
 
-    @font-face {
-      font-family: 'HeadingNow';
-      src: url('HeadingNowTrial-65Medium.ttf') format('truetype');
+.signin-btn {
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--text-main);
+    border-color: rgba(148, 163, 184, 0.6);
+}
+
+.signin-btn:hover {
+    background: white;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(148, 163, 184, 0.35);
+}
+
+/* CONTAINER GERAL */
+.page-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 90px 16px 32px; /* espaço por causa do header fixo */
+}
+
+/* “Papel A4” */
+.paper {
+    position: relative;
+    background: white;
+    max-width: 900px;
+    width: min(900px, 100%);
+    min-height: 60vh;
+    padding: 48px clamp(32px, 6vw, 60px);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--paper-shadow);
+    overflow: hidden;
+}
+
+/* Sombra extra para parecer papel */
+.paper::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.7), transparent);
+    pointer-events: none;
+}
+
+.paper::after {
+    content: "";
+    position: absolute;
+    inset: 16px;
+    border-radius: 18px;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    pointer-events: none;
+}
+
+.paper-inner {
+    position: relative;
+    z-index: 1;
+}
+
+.info1-content {
+    text-align: left;
+    max-width: 520px;
+}
+
+.info1-content h1 {
+    font-size: clamp(2.4rem, 4vw, 3rem);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.info1-content h1 .KGPerfectPenmanship {
+    font-size: 1.15em;
+}
+
+.info1-content h1 .Huglove {
+    font-size: 0.8em;
+    color: var(--accent);
+}
+
+.info1-content h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text-subtle);
+    margin-bottom: 18px;
+}
+
+.info1-content p {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: var(--text-subtle);
+    margin-bottom: 28px;
+}
+
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 0.8rem;
+    margin-bottom: 16px;
+}
+
+.pill-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--accent);
+}
+
+.cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.cta-primary,
+.cta-secondary {
+    border-radius: 999px;
+    padding: 10px 20px;
+    font-size: 0.92rem;
+    cursor: pointer;
+    border: 1px solid transparent;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.1s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.cta-primary {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 10px 26px rgba(79, 70, 229, 0.35);
+}
+
+.cta-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 32px rgba(79, 70, 229, 0.45);
+}
+
+.cta-secondary {
+    background: white;
+    color: var(--text-main);
+    border-color: rgba(148, 163, 184, 0.7);
+}
+
+.cta-secondary:hover {
+    background: #f9fafb;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(148, 163, 184, 0.3);
+}
+
+.small-note {
+    font-size: 0.78rem;
+    color: var(--text-subtle);
+}
+
+/* Coluna direita decorativa no “papel” */
+.paper-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.1fr);
+    gap: 32px;
+    align-items: center;
+}
+
+.paper-side-card {
+    border-radius: 18px;
+    padding: 18px 20px;
+    background: linear-gradient(135deg, #eef2ff, #e0f2fe);
+    box-shadow: 0 12px 30px rgba(148, 163, 184, 0.35);
+    font-size: 0.88rem;
+}
+
+.paper-side-card h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.paper-side-card ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.paper-side-card li {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.paper-bullet {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    margin-top: 6px;
+    background: rgba(15, 23, 42, 0.7);
+}
+
+@media (max-width: 800px) {
+    header {
+        padding: 0 16px;
     }
-    .headingnow {
-  font-family: 'HeadingNow', sans-serif;
-  font-weight: normal;
-  font-size: 1.2em; /* opcional */
-  color: #000000; /* podes mudar a cor também */
-}
- @font-face {
-  font-family: 'Huglove';
-  src: url('Huglove.ttf') format('truetype');
+
+    .page-wrapper {
+        padding: 90px 12px 24px;
+    }
+
+    .paper {
+        padding: 26px 18px 26px;
+        border-radius: 18px;
+    }
+
+    .paper::after {
+        inset: 10px;
+        border-radius: 14px;
+    }
+
+    .paper-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .info1-content {
+        max-width: 100%;
+    }
+
+    .button-container button {
+        padding-inline: 14px;
+    }
 }
 
-.Huglove {
-  font-family: 'Huglove', sans-serif;
-  font-weight: normal;
-  font-size: 1.2em; /* opcional */
-  color: #333232; /* podes mudar a cor também */
-}
+@media (max-width: 480px) {
+    .button-container {
+        gap: 6px;
+    }
 
- @font-face {
-  font-family: 'KGPerfectPenmanship';
-  src: url('KGPerfectPenmanship.ttf') format('truetype');
-}
+    .button-container button {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
 
-.KGPerfectPenmanship{
-  font-family: 'KGPerfectPenmanship', sans-serif;
-  font-weight: normal;
-  font-size: 1.2em; /* opcional */
-  color: #000000; /* podes mudar a cor também */
+    .info1-content h1 {
+        font-size: 2rem;
+    }
+
+    .info1-content h2 {
+        font-size: 1.1rem;
+    }
 }

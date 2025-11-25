@@ -1,40 +1,98 @@
 <!DOCTYPE html>
 <html lang="pt">
 
-    <!--Introdu  ca o de conteudo com meta dados e ligacoes-->
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ED-for-ALL</title>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ED-for-ALL</title>
 
-        <!--Link para o ficheiro CSS-->
-        <link rel="stylesheet" href="assets/css/pageNoAutentication.css">
-    </head>
+    <link rel="stylesheet" href="assets/css/pageNoAutentication.css">
+</head>
 
-    <!--Conteudo visivel na web-->
-    <body>
-        <!--Contrucao do cabecalho da pagina-->
-        <header>
-            <!--Icon e titulo de app-->
-            <div class="logo">
-                <img width="26" height="26" src="https://img.icons8.com/metro/26/graduation-cap.png" alt="graduation-cap"/>
-               <b><span class="KGPerfectPenmanship" style="padding-right: 4px;">ED</span></b><span class="Huglove">for</span><b><span class="KGPerfectPenmanship" style="padding-right: 4px;">ALL</span></b>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="logo">
+            <img width="26" height="26" src="https://img.icons8.com/metro/26/graduation-cap.png" alt="graduation-cap" />
+            <b><span class="KGPerfectPenmanship" style="padding-right: 4px;">ED</span></b>
+            <span class="Huglove">for</span>
+            <b><span class="KGPerfectPenmanship" style="padding-right: 4px;">ALL</span></b>
+        </div>
+
+        <div class="button-container">
+            <button class="signin-btn" onclick="window.location.href='RegistoLogin.html?modo=registo'">Sign in</button>
+            <button class="login-btn" onclick="window.location.href='RegistoLogin.html?modo=login'">Login</button>
+        </div>
+    </header>
+
+    <!-- Área central com o “papel A4” -->
+    <div class="page-wrapper">
+        <div class="paper">
+            <div class="paper-inner">
+                <div class="paper-layout">
+                    <!-- Lado esquerdo: título e texto -->
+                    <div class="info1-content">
+                        <div class="pill">
+                            <span class="pill-dot"></span>
+                            Plataforma inclusiva para alunos e professores
+                        </div>
+
+                        <h1>
+                            <b><span class="KGPerfectPenmanship" style="padding-right: 4px;">ED</span></b>
+                            <span class="Huglove">for</span>
+                            <b><span class="KGPerfectPenmanship" style="padding-right: 4px;">ALL</span></b>
+                        </h1>
+
+                        <h2>Educação para todos</h2>
+
+                        <p>
+                            Adaptação de materiais para diferentes necessidades educativas especiais.
+                            Personaliza, organiza e partilha recursos num único espaço, pensado para ser simples
+                            para o professor e acessível para cada aluno.
+                        </p>
+
+                        <div class="cta-row">
+                            <button class="cta-primary" onclick="window.location.href='RegistoLogin.html?modo=registo'">
+                                Começar agora
+                            </button>
+                            <button class="cta-secondary" onclick="window.location.href='RegistoLogin.html?modo=login'">
+                                Já tenho conta
+                            </button>
+                        </div>
+
+                        <p class="small-note">
+                            Sem complicações: entra, escolhe a turma e começa a adaptar os conteúdos em poucos cliques.
+                        </p>
+                    </div>
+
+                    <!-- Lado direito: “cartão” dentro da folha -->
+                    <div class="paper-side-card">
+                        <h3>O que podes fazer no EDforALL?</h3>
+                        <ul>
+                            <li>
+                                <span class="paper-bullet"></span>
+                                <span>Centralizar materiais para todas as turmas e alunos.</span>
+                            </li>
+                            <li>
+                                <span class="paper-bullet"></span>
+                                <span>Adaptar textos, fichas e exercícios para diferentes perfis.</span>
+                            </li>
+                            <li>
+                                <span class="paper-bullet"></span>
+                                <span>Partilhar recursos com colegas de forma rápida.</span>
+                            </li>
+                            <li>
+                                <span class="paper-bullet"></span>
+                                <span>Acompanhar o progresso de cada aluno com maior clareza.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
+        </div>
+    </div>
+</body>
 
-            <!--Button Login and sign in já conectados com o login e sign in atraves do modo-->
-            <div class="button-container">
-                <button class="signin-btn" onclick="window.location.href='RegistoLogin.html?modo=registo'">Sign in</button>
-                <button class="login-btn" onclick="window.location.href='RegistoLogin.html?modo=login'">Login</button>
-            </div>
-            
-        </header>
-
-        <!--Conteudo que vai aparecer na restante pagina-->
-        <div class="info1-content">
-            <h1> <b><span class="KGPerfectPenmanship" style="padding-right: 4px;">ED</span></b><span class="Huglove">for</span><b><span class="KGPerfectPenmanship" style="padding-right: 4px;">ALL</span></b></h1>
-            <h2>Educação para todos </h2>
-           <!-- <p>Adaptação de materiais para diferentes necessidades educativas<br>especiais. Personalização e partilha recursos com facilidade.</p>-->
-        </div>          
-    </body>
 </html>
