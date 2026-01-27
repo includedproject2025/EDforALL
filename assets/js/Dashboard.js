@@ -109,3 +109,15 @@ fetch("menu.html")
         console.error("Falha crítica ao carregar o menu:", error);
         document.getElementById("menu-container").innerHTML = "<p style='color: red; text-align: center;'>Não foi possível carregar o menu. Verifique a consola para mais detalhes.</p>";
     });
+    const audioInput = document.getElementById("audioInput");
+
+if (audioInput) {
+    audioInput.addEventListener("change", () => {
+        const file = audioInput.files[0];
+
+        if (!file) return;
+
+        // Aqui futuramente ligas ao backend
+        alert(`PDF selecionado para conversão em áudio:\n${file.name}`);
+    });
+}
