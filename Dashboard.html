@@ -43,14 +43,13 @@
                 <button id="criarbtn" class="card-btn">Começar</button>
             </div>
             <!-- Card 4 -->
+<!-- Card 4 -->
 <div class="card">
     <h2>Converter para Áudio</h2>
-    <p>Transforme ficheiros PDF em áudio para apoiar alunos com dificuldades de leitura ou visão.</p>
-    <button class="card-btn" onclick="document.getElementById('audioInput').click()">
-        Converter PDF
-    </button>
-    <input type="file" id="audioInput" accept="application/pdf" hidden>
+    <p>Converta documentos PDF em ficheiros de voz para apoiar alunos com dificuldades de leitura.</p>
+    <button class="card-btn" id="abrirModalAudio">Começar</button>
 </div>
+
 
             <!-- Modal do Card 3 -->
             <div id="modalCriar" class="modal">
@@ -87,6 +86,48 @@
                     </div>
                 </div>
             </div>
+            <!-- Modal Converter para Áudio -->
+<div id="modalAudio" class="modal">
+    <div class="modal-content">
+        <header>Converter para Áudio</header>
+
+        <label>Selecionar PDF:</label>
+        <input type="file" id="audioPdf" accept="application/pdf">
+
+        <label>Voz:</label>
+        <select id="voz">
+            <option value="pt-pt">Português (Portugal)</option>
+            <option value="pt-br">Português (Brasil)</option>
+        </select>
+
+        <label>Velocidade da Leitura:</label>
+        <div class="radio-group">
+            <label class="radio-label">
+                <input type="radio" name="velocidade" value="lenta">
+                <span class="custom-radio"></span>
+                Lenta
+            </label>
+
+            <label class="radio-label">
+                <input type="radio" name="velocidade" value="normal" checked>
+                <span class="custom-radio"></span>
+                Normal
+            </label>
+
+            <label class="radio-label">
+                <input type="radio" name="velocidade" value="rapida">
+                <span class="custom-radio"></span>
+                Rápida
+            </label>
+        </div>
+
+        <div class="modal-buttons">
+            <button id="cancelAudioBtn" class="btn-cancel">Cancelar</button>
+            <i id="confirmAudioBtn" class="bi bi-check-circle-fill btn-check"></i>
+        </div>
+    </div>
+</div>
+
         </section>
     </main>    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
