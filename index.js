@@ -1,5 +1,5 @@
 require('dotenv').config();
-
+const googleTTS = require('google-tts-api');
 const express = require('express');
 const mysql = require('mysql2');
 const bcrypt = require('bcrypt');
@@ -10,13 +10,16 @@ const path = require('path');
 const fs = require('fs'); // Alterado de fs.promises para fs para usar existsSync e mkdirSync
 const app = express();
 const port = Number(process.env.APP_PORT || process.env.PORT || 3001);
-
+const pdfParse = require('pdf-parse');
 const isStrongPassword = (password) =>
     typeof password === 'string' && /^(?=.*[A-Z])(?=.*\d).{8,}$/.test(password);
 
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
-app.use(cors());
+app.use(cors({
+    origin: true,
+    credentials: true
+}));
 
 const baseLimiter = rateLimit({
     windowMs: Number(process.env.RATE_LIMIT_WINDOW_MS || 15 * 60 * 1000),
@@ -44,6 +47,15 @@ app.use(['/login', '/register'], authLimiter);
 
 // Servir ficheiros estáticos da pasta 'uploads' (incluindo 'uploads/avatars/')
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use(express.static(path.join(__dirname)));
+const audioDir = path.join(__dirname, 'uploads', 'audio');
+
+if (!fs.existsSync(audioDir)) {
+    fs.mkdirSync(audioDir, { recursive: true });
+}
+
+// servir a pasta de áudio
+app.use('/uploads/audio', express.static(audioDir));
 
 // --- Configuração do Multer para MATERIAIS (PDFs) ---
 const materialStorage = multer.diskStorage({
@@ -513,14 +525,35 @@ app.post('/materiais/criar', uploadMaterial.single('materialFile'), async (req, 
 
 app.get('/materiais/:username', async (req, res) => {
     const { username } = req.params;
-    const query = 'SELECT ID_Material, Titulo, Caminho_Ficheiro, Estado, Tipo, Data_Criacao FROM Material WHERE Criador_User = ? ORDER BY Data_Criacao DESC';
+
+    const query = `
+        SELECT ID_Material, Titulo, Caminho_Ficheiro, Estado, Tipo, Data_Criacao 
+        FROM Material 
+        WHERE Criador_User = ?
+        ORDER BY Data_Criacao DESC
+    `;
+
     try {
         const [resultados] = await db.query(query, [username]);
-        const materiaisComCaminhoCorreto = resultados.map(m => ({
-            ...m,
-            Caminho_Ficheiro_Completo: `/uploads/materiais/${m.Caminho_Ficheiro}` // Para o frontend
-        }));
+
+        const materiaisComCaminhoCorreto = resultados.map(m => {
+
+            let caminhoCompleto;
+
+            if (m.Tipo === 2) {
+                caminhoCompleto = `/uploads/audio/${m.Caminho_Ficheiro}`;
+            } else {
+                caminhoCompleto = `/uploads/materiais/${m.Caminho_Ficheiro}`;
+            }
+
+            return {
+                ...m,
+                Caminho_Ficheiro_Completo: caminhoCompleto
+            };
+        });
+
         res.status(200).json(materiaisComCaminhoCorreto);
+
     } catch (err) {
         console.error('Erro ao buscar materiais:', err);
         res.status(500).json({ message: 'Erro interno do servidor.' });
@@ -658,6 +691,86 @@ app.get('/material/:idMaterial', async (req, res) => {
     } catch (err) {
         console.error(`Erro ao buscar detalhes do material ${idMaterial}:`, err);
         res.status(500).json({ message: 'Erro interno do servidor.' });
+    }
+});
+
+app.post('/materiais/convert-to-audio', uploadMaterial.single('pdfFile'), async (req, res) => {
+    const { criadorUser } = req.body;
+    const file = req.file;
+
+    if (!file) {
+        return res.status(400).json({ message: "PDF não enviado." });
+    }
+
+    try {
+        const dataBuffer = fs.readFileSync(file.path);
+        const pdfData = await pdfParse(dataBuffer);
+        let texto = pdfData.text;
+
+        if (!texto || texto.trim().length < 5) {
+            fs.unlinkSync(file.path);
+            return res.status(400).json({ message: "PDF sem texto válido." });
+        }
+
+        // dividir texto em blocos de 180 caracteres
+        const chunks = texto.match(/[\s\S]{1,180}/g);
+
+        const tempFiles = [];
+        let index = 0;
+
+        for (const chunk of chunks) {
+    const urls = googleTTS.getAllAudioUrls(chunk, {
+        lang: "pt-PT",
+        slow: false
+    });
+
+    for (const part of urls) {
+        const response = await fetch(part.url);
+const tempPath = path.join(audioDir, `temp-${Date.now()}-${index}.mp3`);
+
+const arrayBuffer = await response.arrayBuffer();
+const buffer = Buffer.from(arrayBuffer);
+
+fs.writeFileSync(tempPath, buffer);
+
+        tempFiles.push(tempPath);
+        index++;
+    }
+}
+
+        // juntar todos os áudios
+        const finalFileName = `audio-${Date.now()}.mp3`;
+const finalPath = path.join(audioDir, finalFileName);
+
+const buffers = tempFiles.map(file => fs.readFileSync(file));
+const finalBuffer = Buffer.concat(buffers);
+
+fs.writeFileSync(finalPath, finalBuffer);
+        // apagar temporários
+        tempFiles.forEach(f => fs.unlinkSync(f));
+        fs.unlinkSync(file.path);
+
+const [resultDB] = await db.query(
+    'INSERT INTO Material (Titulo, Caminho_Ficheiro, Criador_User, Estado, Tipo) VALUES (?, ?, ?, ?, ?)',
+    [
+        `Áudio - ${file.originalname}`,
+        finalFileName,
+        req.body.criadorUser,
+        0,
+        2 // Tipo 2 = Áudio
+    ]
+);
+
+        res.json({
+    sucesso: true,
+    audioPath: `/uploads/audio/${finalFileName}`,
+    materialId: resultDB.insertId
+});
+
+    } catch (err) {
+        console.error("Erro conversão áudio:", err);
+        if (file) fs.unlinkSync(file.path);
+        res.status(500).json({ message: "Erro ao converter para áudio." });
     }
 });
 

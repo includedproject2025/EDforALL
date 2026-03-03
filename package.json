@@ -24,8 +24,10 @@
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "express-rate-limit": "^8.2.1",
+    "google-tts-api": "^2.0.2",
     "multer": "^2.0.2",
     "mysql2": "^3.16.2",
+    "pdf-parse": "^1.1.1",
     "winston": "^3.18.3"
   }
 }

@@ -125,42 +125,84 @@ fetch("menu.html")
         // MODAL CONVERTER PARA ÁUDIO
         // ===============================
         const abrirModalAudio = document.getElementById("abrirModalAudio");
-        const modalAudio = document.getElementById("modalAudio");
         const cancelAudioBtn = document.getElementById("cancelAudioBtn");
         const confirmAudioBtn = document.getElementById("confirmAudioBtn");
 
-        if (abrirModalAudio && modalAudio) {
+        if (abrirModalAudio) {
             abrirModalAudio.addEventListener("click", () => {
-                modalAudio.style.display = "flex";
+                const modalAudio = document.getElementById("modalAudio");
+                if (modalAudio) modalAudio.style.display = "flex";
             });
         }
 
         if (cancelAudioBtn) {
             cancelAudioBtn.addEventListener("click", () => {
-                modalAudio.style.display = "none";
+                const modalAudio = document.getElementById("modalAudio");
+                if (modalAudio) modalAudio.style.display = "none";
             });
         }
 
         if (confirmAudioBtn) {
-            confirmAudioBtn.addEventListener("click", () => {
-                const pdf = document.getElementById("audioPdf").files[0];
-                const voz = document.getElementById("voz").value;
-                const velocidade = document.querySelector('input[name="velocidade"]:checked').value;
+            confirmAudioBtn.addEventListener("click", async () => {
+
+                console.log("BOTÃO CLICADO");
+
+                const modalAudio = document.getElementById("modalAudio");
+                const pdfInput = document.getElementById("audioPdf");
+                const pdf = pdfInput ? pdfInput.files[0] : null;
 
                 if (!pdf) {
                     alert("Por favor, selecione um ficheiro PDF.");
                     return;
                 }
 
-                console.log("PDF:", pdf.name);
-                console.log("Voz:", voz);
-                console.log("Velocidade:", velocidade);
+                const formData = new FormData();
+                formData.append("pdfFile", pdf);
+                formData.append("criadorUser", localStorage.getItem("userIdentifier"));
 
-                // FUTURO: enviar para backend (TTS)
-                modalAudio.style.display = "none";
+                try {
+                    const response = await fetch("http://127.0.0.1:3001/materiais/convert-to-audio", {
+                        method: "POST",
+                        body: formData
+                    });
+
+                    const text = await response.text();
+
+                    let result;
+                    try {
+                        result = JSON.parse(text);
+                    } catch (e) {
+                        console.error("Resposta não é JSON:", text);
+                        throw new Error("Resposta inválida do servidor.");
+                    }
+
+                    console.log("Resposta backend:", result);
+
+                    if (result.sucesso && result.audioPath) {
+
+                        alert("Áudio criado com sucesso!");
+
+                        const audioUrl = "http://localhost:3001" + result.audioPath;
+                        console.log("Tocando:", audioUrl);
+
+                        const audio = new Audio(audioUrl);
+                        audio.play().catch(err => {
+                            console.error("Erro ao tocar áudio:", err);
+                        });
+
+                        if (modalAudio) modalAudio.style.display = "none";
+
+                    } else {
+                        alert(result.message || "Erro na conversão.");
+                    }
+
+                } catch (error) {
+                    console.error("ERRO REAL DO FRONT:", error);
+                    alert("Erro inesperado no frontend: " + error.message);
+                }
+
             });
-        }
-
+               }
     })
     .catch(error => {
         console.error("Falha crítica ao carregar o menu:", error);
